@@ -4,8 +4,8 @@ import Card from '@/components/ui/Card';
 import { useLanguage } from '@/lib/LanguageContext';
 import dynamic from 'next/dynamic';
 
-// Dynamically import NomadMap to avoid SSR issues with Mapbox
-const NomadMap = dynamic(() => import('@/components/NomadMap'), {
+// Dynamically import SimpleMap to avoid SSR issues with Mapbox
+const SimpleMap = dynamic(() => import('@/components/SimpleMap'), {
   ssr: false,
   loading: () => (
     <div className="h-[500px] bg-gray-100 rounded-xl flex items-center justify-center">
@@ -101,7 +101,7 @@ export default function ContactSection() {
 
           {/* Map */}
           <div className="h-[500px] rounded-xl overflow-hidden card-shadow">
-            <NomadMap />
+            <SimpleMap />
           </div>
         </div>
       </div>
