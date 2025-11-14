@@ -8,13 +8,15 @@
   --card-bg: #ffffff;
   --border: #e5e5e5;
 
-  /* Dark theme colors */
-  --dark-bg-start: #1a2e2e;
-  --dark-bg-mid1: #234141;
-  --dark-bg-mid2: #2d5353;
-  --dark-bg-end: #1f3d3d;
-  --dark-text: #e8f0e8;
-  --dark-accent: rgba(64, 196, 99, 0.15);
+  /* Modern Dark theme colors - Deep Blue/Purple Gradient */
+  --dark-bg-start: #0f172a;
+  --dark-bg-mid1: #1e293b;
+  --dark-bg-mid2: #334155;
+  --dark-bg-end: #1e1b4b;
+  --dark-text: #f1f5f9;
+  --dark-accent: rgba(249, 115, 22, 0.15);
+  --accent-orange: #f97316;
+  --accent-cyan: #06b6d4;
 }
 
 body {
@@ -41,9 +43,9 @@ body {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle at 20% 50%, rgba(52, 168, 83, 0.08) 0%, transparent 50%),
-              radial-gradient(circle at 80% 80%, rgba(64, 196, 99, 0.06) 0%, transparent 50%),
-              radial-gradient(circle at 40% 10%, rgba(48, 152, 77, 0.07) 0%, transparent 50%);
+  background: radial-gradient(circle at 20% 50%, rgba(249, 115, 22, 0.12) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.10) 0%, transparent 50%),
+              radial-gradient(circle at 40% 10%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
   animation: backgroundShift 25s ease-in-out infinite;
   z-index: 0;
   pointer-events: none;
@@ -83,28 +85,28 @@ body {
     text-wrap: balance;
   }
 
-  /* Glass morphism effect - Enhanced visibility */
+  /* Modern Glass morphism effect with neon glow */
   .glass-card {
-    background: rgba(255, 255, 255, 0.18);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.5),
-      0 2px 8px rgba(0, 0, 0, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+      0 8px 32px rgba(0, 0, 0, 0.37),
+      0 2px 8px rgba(0, 0, 0, 0.25),
+      inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .glass-card:hover {
-    background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.4);
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(6, 182, 212, 0.10) 100%);
+    border-color: rgba(249, 115, 22, 0.4);
     box-shadow:
-      0 16px 48px rgba(0, 0, 0, 0.6),
-      0 4px 12px rgba(0, 0, 0, 0.5),
-      inset 0 1px 0 rgba(255, 255, 255, 0.35),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.25);
-    transform: translateY(-4px);
+      0 16px 48px rgba(249, 115, 22, 0.25),
+      0 4px 12px rgba(6, 182, 212, 0.2),
+      0 0 40px rgba(249, 115, 22, 0.15),
+      inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    transform: translateY(-6px) scale(1.02);
   }
 
   /* CD Effect */
