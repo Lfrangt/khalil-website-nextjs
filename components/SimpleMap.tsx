@@ -107,21 +107,28 @@ export default function SimpleMap() {
         
         // Create the actual avatar element
         const markerEl = document.createElement('div');
+        
+        // Responsive size based on window width
+        const isMobile = window.innerWidth < 768;
+        const avatarSize = isMobile ? 60 : 80;
+        const halfSize = avatarSize / 2;
+        
         markerEl.style.position = 'absolute';
-        markerEl.style.left = '-40px'; // Half of 80px to center
-        markerEl.style.top = '-40px';  // Half of 80px to center
+        markerEl.style.left = `-${halfSize}px`;
+        markerEl.style.top = `-${halfSize}px`;
         markerEl.style.backgroundImage = 'url(/khalil.jpg)';
         markerEl.style.backgroundSize = 'cover';
         markerEl.style.backgroundPosition = 'center';
-        markerEl.style.width = '80px';
-        markerEl.style.height = '80px';
+        markerEl.style.width = `${avatarSize}px`;
+        markerEl.style.height = `${avatarSize}px`;
         markerEl.style.borderRadius = '50%';
-        markerEl.style.border = '4px solid #ff8a00';
+        markerEl.style.border = isMobile ? '3px solid #ff8a00' : '4px solid #ff8a00';
         markerEl.style.boxShadow = '0 8px 20px rgba(255, 138, 0, 0.6), 0 0 0 8px rgba(255, 138, 0, 0.2)';
         markerEl.style.cursor = 'pointer';
-        markerEl.style.transition = 'all 0.3s ease';
-        markerEl.style.opacity = '0';
-        markerEl.style.animation = 'marker-appear 0.6s ease-out 0.5s forwards'; // Appear immediately at Wenzhou
+        markerEl.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+        markerEl.style.opacity = '1'; // Always visible!
+        markerEl.style.animation = 'marker-appear 0.6s ease-out 0.5s both';
+        markerEl.style.willChange = 'transform'; // Optimize for animation performance
         
         // Hover effect
         markerEl.onmouseenter = () => {
@@ -172,15 +179,15 @@ export default function SimpleMap() {
   }, [language]);
 
   return (
-    <div className="relative w-full h-full bg-gray-50 rounded-xl overflow-hidden shadow-2xl">
-      <div ref={mapContainer} className="w-full h-full map-container" />
+    <div className="relative w-full h-full bg-gray-50 rounded-xl overflow-hidden shadow-2xl touch-action-none">
+      <div ref={mapContainer} className="w-full h-full map-container" style={{ minHeight: '400px' }} />
 
       {/* Flight indicator - Apple Glass Style */}
       {mapLoaded && (
-        <div className="absolute top-6 left-1/2 -translate-x-1/2 z-10 flight-indicator">
+        <div className="absolute top-3 md:top-6 left-1/2 -translate-x-1/2 z-10 flight-indicator">
           <div className="glass-card-flight">
-            <span className="text-lg">✈️</span>
-            <span className="text-xs font-medium text-gray-800">
+            <span className="text-base md:text-lg">✈️</span>
+            <span className="text-[10px] md:text-xs font-medium text-gray-800">
               {language === 'zh' ? '温州 → 温哥华' : 'Wenzhou → Vancouver'}
             </span>
           </div>
@@ -189,15 +196,15 @@ export default function SimpleMap() {
 
       {/* Location Badge - Apple Glassmorphism Style */}
       {mapLoaded && (
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 location-badge-journey">
+        <div className="absolute bottom-3 md:bottom-6 left-1/2 -translate-x-1/2 z-10 location-badge-journey px-2">
           <div className="glass-card group">
-            <div className="flex items-center gap-2">
-              <span className="text-base">📍</span>
-              <span className="text-sm font-semibold text-gray-900">
+            <div className="flex items-center gap-1.5 md:gap-2">
+              <span className="text-sm md:text-base">📍</span>
+              <span className="text-xs md:text-sm font-semibold text-gray-900">
                 {language === 'zh' ? '温哥华，加拿大' : 'Vancouver, Canada'}
               </span>
             </div>
-            <div className="glass-subtitle">
+            <div className="glass-subtitle text-[10px] md:text-[11px]">
               {language === 'zh' ? '温州 🇨🇳 → 温哥华 🍁' : 'Wenzhou 🇨🇳 → Vancouver 🍁'}
             </div>
           </div>
@@ -224,13 +231,20 @@ export default function SimpleMap() {
           backdrop-filter: blur(20px) saturate(180%);
           -webkit-backdrop-filter: blur(20px) saturate(180%);
           border: 1px solid rgba(255, 255, 255, 0.8);
-          border-radius: 16px;
-          padding: 10px 16px;
+          border-radius: 12px;
+          padding: 8px 12px;
           box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08),
                       0 2px 8px rgba(0, 0, 0, 0.04),
                       inset 0 1px 0 rgba(255, 255, 255, 0.9);
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+          .glass-card {
+            border-radius: 16px;
+            padding: 10px 16px;
+          }
         }
 
         .glass-card:hover {
@@ -261,14 +275,22 @@ export default function SimpleMap() {
           backdrop-filter: blur(20px) saturate(180%);
           -webkit-backdrop-filter: blur(20px) saturate(180%);
           border: 1px solid rgba(255, 255, 255, 0.8);
-          border-radius: 20px;
-          padding: 8px 14px;
+          border-radius: 16px;
+          padding: 6px 10px;
           box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08),
                       0 2px 8px rgba(0, 0, 0, 0.04),
                       inset 0 1px 0 rgba(255, 255, 255, 0.9);
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: 6px;
+        }
+
+        @media (min-width: 768px) {
+          .glass-card-flight {
+            border-radius: 20px;
+            padding: 8px 14px;
+            gap: 8px;
+          }
         }
 
         /* Hide Mapbox logo and attribution */
