@@ -97,14 +97,20 @@ export default function InterestsPreview() {
   ];
 
   return (
-    <section id="interests" className="py-24 bg-white">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="interests" className="py-24 dark-section relative overflow-hidden">
+      {/* 背景装饰 */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-10 w-96 h-96 bg-orange-500/12 rounded-full filter blur-3xl animate-float"></div>
+        <div className="absolute bottom-1/4 right-10 w-80 h-80 bg-cyan-500/10 rounded-full filter blur-3xl animate-float-delay"></div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Section Title */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-16 animate-fade-in">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 bg-gradient-to-r from-orange-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
             {language === 'zh' ? '兴趣爱好' : 'My Interests'}
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
             {language === 'zh'
               ? '探索我的多彩世界，点击了解更多'
               : 'Explore my colorful world, click to learn more'}
