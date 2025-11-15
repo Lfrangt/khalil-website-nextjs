@@ -26,12 +26,12 @@ export default function ContactSection() {
           {/* Contact Info Card */}
           <div className="bg-slate-800 p-8 rounded-xl text-center animate-slide-up">
             <p className="text-sm text-gray-400 mb-2">📧 {t.contact.email}</p>
-            <a
-              href="mailto:lfrangt.com@gmail.com"
+                <a
+                  href="mailto:lfrangt.com@gmail.com"
               className="text-lg text-white hover:text-orange-400 transition-colors inline-block break-all"
-            >
-              lfrangt.com@gmail.com
-            </a>
+                >
+                  lfrangt.com@gmail.com
+                </a>
           </div>
         </div>
       </div>

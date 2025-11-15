@@ -95,7 +95,7 @@ export default function HeroSection() {
               className="group px-8 py-4 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-semibold text-sm animate-slide-up delay-500 transition-colors duration-300"
             >
               <span className="flex items-center justify-center gap-2">
-                {t.common.viewProjects}
+              {t.common.viewProjects}
                 <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
@@ -106,7 +106,7 @@ export default function HeroSection() {
               className="group px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-semibold text-sm animate-slide-up delay-600 transition-colors duration-300"
             >
               <span className="flex items-center justify-center gap-2">
-                {t.common.contact}
+              {t.common.contact}
                 <svg className="w-4 h-4 group-hover:rotate-12 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>

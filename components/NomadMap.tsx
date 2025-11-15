@@ -19,17 +19,36 @@ export default function NomadMap() {
   const [locationError, setLocationError] = useState<string | null>(null);
   const [isSharing, setIsSharing] = useState(false);
 
+  // Flight path coordinates
+  const wenzhou: [number, number] = [120.6986, 28.0006]; // Wenzhou, China
+  const vancouver: [number, number] = [-123.1207, 49.2827]; // Vancouver, Canada
+
+  // Generate arc points for flight path (great circle route)
+  const generateArc = (start: [number, number], end: [number, number], numPoints: number = 100): [number, number][] => {
+    const points: [number, number][] = [];
+    for (let i = 0; i <= numPoints; i++) {
+      const t = i / numPoints;
+      // Simple interpolation - for trans-Pacific flight
+      const lng = start[0] + (end[0] - start[0]) * t;
+      const lat = start[1] + (end[1] - start[1]) * t;
+      // Add arc curvature for better visualization
+      const arcHeight = Math.sin(t * Math.PI) * 8; // Arc curvature
+      points.push([lng, lat + arcHeight]);
+    }
+    return points;
+  };
+
   // Recenter map to Khalil's location (no privacy invasion!)
   const recenterToKhalil = () => {
     const khalilLocation: [number, number] = [-123.1207, 49.2827]; // Vancouver
-    
-    if (map.current) {
-      map.current.flyTo({
+
+        if (map.current) {
+          map.current.flyTo({
         center: khalilLocation,
-        zoom: 13,
-        duration: 1500,
-      });
-    }
+            zoom: 13,
+            duration: 1500,
+          });
+        }
   };
 
   useEffect(() => {
@@ -39,18 +58,19 @@ export default function NomadMap() {
 
     // Set a timeout to prevent infinite loading
     const timeout = setTimeout(() => {
-      console.error('Map loading timeout');
-      setLocationError(language === 'zh' ? '地图加载超时' : 'Map loading timeout');
-      setMapLoaded(true);
+        console.error('Map loading timeout');
+        setLocationError(language === 'zh' ? '地图加载超时' : 'Map loading timeout');
+        setMapLoaded(true);
     }, 10000); // 10 second timeout
 
     try {
       // Initialize map with dark theme like Instagram/WeChat
+      // Center map to show both Wenzhou and Vancouver
       const mapInstance = new mapboxgl.Map({
         container: mapContainer.current,
         style: 'mapbox://styles/mapbox/dark-v11',
-        center: [-123.1207, 49.2827], // Default to Vancouver
-        zoom: 11,
+        center: [-30, 45], // Center between Wenzhou and Vancouver
+        zoom: 2.5, // Zoom out to show full Pacific flight path
         dragRotate: false,
         touchZoomRotate: false,
         attributionControl: false,
@@ -63,6 +83,72 @@ export default function NomadMap() {
         console.log('Map loaded successfully');
         clearTimeout(timeout);
         setMapLoaded(true);
+
+        // Generate flight path from Wenzhou to Vancouver
+        const flightPath = generateArc(wenzhou, vancouver);
+
+        // Add flight path as a line
+        mapInstance.addSource('flight-route', {
+          type: 'geojson',
+          data: {
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'LineString',
+              coordinates: flightPath
+            }
+          }
+        });
+
+        // Add flight path line layer with animation
+        mapInstance.addLayer({
+          id: 'flight-route-line',
+          type: 'line',
+          source: 'flight-route',
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round'
+          },
+          paint: {
+            'line-color': '#3b82f6', // Blue color
+            'line-width': 3,
+            'line-opacity': 0.8
+          }
+        });
+
+        // Add animated dashed line on top
+        mapInstance.addLayer({
+          id: 'flight-route-dashed',
+          type: 'line',
+          source: 'flight-route',
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round'
+          },
+          paint: {
+            'line-color': '#60a5fa',
+            'line-width': 2,
+            'line-dasharray': [0, 4, 3],
+            'line-opacity': 0.6
+          }
+        });
+
+        // Add markers for start and end points
+        // Wenzhou marker
+        const wenzhouEl = document.createElement('div');
+        wenzhouEl.className = 'flight-marker';
+        wenzhouEl.style.width = '12px';
+        wenzhouEl.style.height = '12px';
+        wenzhouEl.style.borderRadius = '50%';
+        wenzhouEl.style.backgroundColor = '#3b82f6';
+        wenzhouEl.style.border = '2px solid white';
+        wenzhouEl.style.boxShadow = '0 0 10px rgba(59, 130, 246, 0.8)';
+
+        new mapboxgl.Marker({ element: wenzhouEl })
+          .setLngLat(wenzhou)
+          .setPopup(new mapboxgl.Popup({ offset: 25 }).setText(language === 'zh' ? '温州（起点）' : 'Wenzhou (Start)'))
+          .addTo(mapInstance);
+
         // Set Khalil's location (Vancouver) by default - no privacy invasion!
         const khalilLocation: [number, number] = [-123.1207, 49.2827]; // Vancouver
         setCurrentLocation(khalilLocation);
@@ -187,9 +273,9 @@ export default function NomadMap() {
         className="absolute top-4 right-4 z-20 bg-white/95 backdrop-blur-md p-3 rounded-full shadow-lg hover:bg-white transition-all hover:scale-110"
         title={language === 'zh' ? '回到我的位置' : 'Back to My Location'}
       >
-        <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-        </svg>
+          </svg>
       </button>
 
       {/* Map container */}

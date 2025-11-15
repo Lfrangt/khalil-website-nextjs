@@ -100,7 +100,7 @@ export default function ReadingSection() {
       titleEn: 'Dance Dance Dance',
       author: '村上春树',
       authorEn: 'Haruki Murakami',
-      cover: 'https://img2.doubanio.com/view/subject/s/public/s1103152.jpg',
+      cover: 'https://upload.wikimedia.org/wikipedia/en/4/4f/Dance_Dance_Dance_Murakami.jpg',
       review: '村上春树用魔幻现实主义探讨现代都市人的孤独。生活本身就是一场舞蹈，即使孤独，也要继续跳下去。',
       reviewEn: 'Murakami explores modern urban loneliness through magical realism. Life itself is a dance, and even in loneliness, we must keep dancing.',
       category: '小说',
@@ -111,7 +111,7 @@ export default function ReadingSection() {
       titleEn: '1984',
       author: '乔治·奥威尔',
       authorEn: 'George Orwell',
-      cover: 'https://img9.doubanio.com/view/subject/s/public/s4371408.jpg',
+      cover: 'https://upload.wikimedia.org/wikipedia/commons/c/c3/1984first.jpg',
       review: '奥威尔对极权主义的深刻警示。"老大哥在看着你"这句话让我时刻保持对权力的警惕。',
       reviewEn: 'Orwell\'s profound warning against totalitarianism. "Big Brother is watching you" reminds me to stay vigilant about power.',
       category: '小说',
@@ -122,7 +122,7 @@ export default function ReadingSection() {
       titleEn: 'My Brilliant Friend',
       author: '埃莱娜·费兰特',
       authorEn: 'Elena Ferrante',
-      cover: 'https://img2.doubanio.com/view/subject/s/public/s29415424.jpg',
+      cover: 'https://upload.wikimedia.org/wikipedia/en/4/4c/My_Brilliant_Friend_cover.jpg',
       review: '费兰特笔下两个女性的成长史诗。友谊、嫉妒、竞争，真实展现了女性之间复杂而深刻的情感。',
       reviewEn: 'Ferrante\'s epic of two women\'s growth. Friendship, jealousy, competition - a真实 portrayal of complex emotions between women.',
       category: '小说',
@@ -133,7 +133,7 @@ export default function ReadingSection() {
       titleEn: 'Gone with the Wind',
       author: '玛格丽特·米切尔',
       authorEn: 'Margaret Mitchell',
-      cover: 'https://img2.doubanio.com/view/subject/s/public/s1073231.jpg',
+      cover: 'https://upload.wikimedia.org/wikipedia/en/6/6b/Gone_with_the_Wind_cover.jpg',
       review: '一个乱世佳人的传奇。在南北战争的背景下，斯嘉丽的坚韧和对土地的执着让我看到生命的韧性。',
       reviewEn: 'A legend of a southern belle. Against the Civil War backdrop, Scarlett\'s resilience and attachment to land showed me life\'s tenacity.',
       category: '小说',
@@ -144,7 +144,7 @@ export default function ReadingSection() {
       titleEn: 'The Republic',
       author: '柏拉图',
       authorEn: 'Plato',
-      cover: 'https://img1.doubanio.com/view/subject/s/public/s1502183.jpg',
+      cover: 'https://upload.wikimedia.org/wikipedia/commons/3/3d/Plato-raphael.jpg',
       review: '西方哲学的奠基之作。柏拉图对正义、理想社会的探讨，2000多年后依然深刻。',
       reviewEn: 'Foundation of Western philosophy. Plato\'s exploration of justice and ideal society remains profound after 2000+ years.',
       category: '哲学',
@@ -155,7 +155,7 @@ export default function ReadingSection() {
       titleEn: 'Critique of Pure Reason',
       author: '伊曼努尔·康德',
       authorEn: 'Immanuel Kant',
-      cover: 'https://img1.doubanio.com/view/subject/s/public/s6989070.jpg',
+      cover: 'https://upload.wikimedia.org/wikipedia/commons/f/f2/Kant_gemaelde_3.jpg',
       review: '康德三大批判之一。颠覆性地解答了"我能知道什么"这个根本问题，重塑了哲学的边界。',
       reviewEn: 'One of Kant\'s three critiques. Revolutionarily answered "What can I know?" and reshaped philosophy\'s boundaries.',
       category: '哲学',
@@ -166,7 +166,7 @@ export default function ReadingSection() {
       titleEn: 'The World as Will and Representation',
       author: '叔本华',
       authorEn: 'Arthur Schopenhauer',
-      cover: 'https://img3.doubanio.com/view/subject/s/public/s29376084.jpg',
+      cover: 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Arthur_Schopenhauer_Portrait_by_Ludwig_Sigismund_Ruhl_1815.jpg',
       review: '叔本华的悲观哲学让我重新审视欲望和意志。生命的本质是痛苦，但理解痛苦本身就是一种解脱。',
       reviewEn: 'Schopenhauer\'s pessimistic philosophy made me re-examine desire and will. Life\'s essence is suffering, but understanding suffering itself is liberation.',
       category: '哲学',
@@ -177,7 +177,7 @@ export default function ReadingSection() {
       titleEn: 'No Exit',
       author: '让-保罗·萨特',
       authorEn: 'Jean-Paul Sartre',
-      cover: 'https://img2.doubanio.com/view/subject/s/public/s4680940.jpg',
+      cover: 'https://upload.wikimedia.org/wikipedia/commons/7/77/Sartre_1967_crop.jpg',
       review: '萨特的存在主义名剧。"他人即地狱"揭示了人际关系的本质和自由选择的重负。',
       reviewEn: 'Sartre\'s existentialist masterpiece. "Hell is other people" reveals the essence of human relations and the burden of free choice.',
       category: '哲学',
@@ -188,7 +188,7 @@ export default function ReadingSection() {
       titleEn: 'The Lily of the Field and the Bird of the Air',
       author: '索伦·克尔凯郭尔',
       authorEn: 'Søren Kierkegaard',
-      cover: 'https://img1.doubanio.com/view/subject/s/public/s29460752.jpg',
+      cover: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Kierkegaard.jpg',
       review: '克尔凯郭尔用诗意的笔触探讨信仰与存在。百合和飞鸟的隐喻让我理解生命的单纯与自由。',
       reviewEn: 'Kierkegaard explores faith and existence with poetic prose. The metaphor of lilies and birds helped me understand life\'s simplicity and freedom.',
       category: '哲学',
@@ -199,7 +199,7 @@ export default function ReadingSection() {
       titleEn: 'In Search of Lost Time',
       author: '马塞尔·普鲁斯特',
       authorEn: 'Marcel Proust',
-      cover: 'https://img1.doubanio.com/view/subject/s/public/s27372009.jpg',
+      cover: 'https://upload.wikimedia.org/wikipedia/commons/d/d8/Marcel_Proust_vers_1895.jpg',
       review: '20世纪最伟大的小说之一。普鲁斯特用细腻的笔触重构记忆，探索时间与自我的本质。（未读完）',
       reviewEn: 'One of the greatest 20th century novels. Proust reconstructs memory with delicate prose, exploring time and self. (Unfinished)',
       category: '小说',
@@ -210,7 +210,7 @@ export default function ReadingSection() {
       titleEn: 'Poor Charlie\'s Almanack',
       author: '查理·芒格',
       authorEn: 'Charlie Munger',
-      cover: 'https://img1.doubanio.com/view/subject/s/public/s27326978.jpg',
+      cover: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/Charlie_Munger_2010.jpg',
       review: '芒格的多元思维模型彻底改变了我的思考方式。跨学科学习和终身阅读成为我的人生指南。',
       reviewEn: 'Munger\'s mental models completely changed my thinking. Interdisciplinary learning and lifelong reading became my life guide.',
       category: '投资',
@@ -221,7 +221,7 @@ export default function ReadingSection() {
       titleEn: 'The Spirit of Laws',
       author: '孟德斯鸠',
       authorEn: 'Montesquieu',
-      cover: 'https://img2.doubanio.com/view/subject/s/public/s1561631.jpg',
+      cover: 'https://upload.wikimedia.org/wikipedia/commons/e/e5/Montesquieu_1.png',
       review: '三权分立理论的源头。孟德斯鸠对政治制度的分析影响了整个现代民主世界。',
       reviewEn: 'Origin of separation of powers. Montesquieu\'s analysis of political systems influenced the entire modern democratic world.',
       category: '法律',
@@ -232,7 +232,7 @@ export default function ReadingSection() {
       titleEn: 'The Law School',
       author: '博西格诺',
       authorEn: 'John Bonsignore',
-      cover: 'https://img1.doubanio.com/view/subject/s/public/s3966916.jpg',
+      cover: 'https://upload.wikimedia.org/wikipedia/commons/d/d4/Courthouse_columns.jpg',
       review: '法学入门的经典教材。通过案例和故事，让我理解法律不仅是规则，更是社会正义的体现。',
       reviewEn: 'Classic legal studies textbook. Through cases and stories, I understood that law is not just rules, but the embodiment of social justice.',
       category: '法律',
@@ -260,27 +260,49 @@ export default function ReadingSection() {
 
   return (
     <section id="reading" className="py-24 dark-section">
-      <div className="max-w-6xl mx-auto px-6 space-y-16 relative z-10">
-        {/* Section Title */}
-        <div className="text-center animate-fade-in">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            {language === 'zh' ? '📚 我读过的书' : '📚 Books I\'ve Read'}
-          </h2>
-          <p className="text-gray-100 max-w-2xl mx-auto leading-relaxed">
+      <div className="max-w-6xl mx-auto px-6 space-y-20 relative z-10">
+        {/* Hero Section - Apple Style */}
+        <div className="text-center animate-fade-in pt-8 md:pt-16 pb-4">
+          {/* Large Title with Gradient */}
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              {language === 'zh' ? '阅读' : 'Reading'}
+            </span>
+          </h1>
+          
+          {/* Subtitle */}
+          <p className="text-xl md:text-2xl text-gray-300 mb-8 font-light max-w-3xl mx-auto leading-relaxed">
             {language === 'zh'
-              ? '阅读让我与伟大的思想对话，每本书都是通往新世界的一扇门'
-              : 'Reading allows me to dialogue with great minds. Each book is a door to a new world'}
+              ? '与伟大的思想对话'
+              : 'In dialogue with great minds'}
+          </p>
+          
+          {/* Description */}
+          <p className="text-base md:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            {language === 'zh'
+              ? '每本书都是通往新世界的一扇门，在阅读中寻找智慧、思考和成长'
+              : 'Every book is a door to a new world. Finding wisdom, reflection, and growth through reading'}
           </p>
         </div>
 
-        {/* Reading Quote */}
-        <div className="glass-card rounded-xl p-6 border-l-4 border-green-500/50 animate-fade-in" style={{ animationDelay: '100ms' }}>
-          <blockquote className="text-lg md:text-xl text-gray-50 italic text-center leading-relaxed">
-            {language === 'zh'
-              ? '"在我的一生中，我所认识的聪明人没有不每天阅读的——一个都没有"'
-              : '"In my whole life, I have known no wise people who didn\'t read all the time — none, zero"'}
-          </blockquote>
-          <p className="text-sm text-gray-400 mt-3 text-center">— Charlie Munger</p>
+        {/* Elegant Quote Card - Apple Style */}
+        <div className="max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: '200ms' }}>
+          <div className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-white/5">
+            {/* Quote Mark */}
+            <div className="absolute top-6 left-6 text-6xl text-purple-400/20 font-serif">&ldquo;</div>
+            
+            {/* Quote Text */}
+            <blockquote className="text-lg md:text-2xl text-white font-light text-center leading-relaxed relative z-10">
+              {language === 'zh'
+                ? '在我的一生中，我所认识的聪明人没有不每天阅读的——一个都没有'
+                : 'In my whole life, I have known no wise people who didn\'t read all the time — none, zero'}
+            </blockquote>
+            
+            {/* Author */}
+            <p className="text-sm md:text-base text-gray-400 mt-6 text-center font-light">
+              — Charlie Munger
+            </p>
+          </div>
         </div>
 
         {/* Books Grid */}
