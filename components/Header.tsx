@@ -31,6 +31,7 @@ export default function Header() {
 
   const navLinks = [
     { href: '/', label: t.nav.home },
+    { href: '/influencers', label: t.nav.influencers },
     { href: '/music', label: t.nav.music },
     { href: '/movies', label: t.nav.movies },
     { href: '/programming', label: t.nav.programming },

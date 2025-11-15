@@ -108,7 +108,7 @@ export default function InterestsPreview() {
         {/* Section Title */}
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 bg-gradient-to-r from-orange-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
-            {language === 'zh' ? '兴趣爱好' : 'My Interests'}
+            {language === 'zh' ? '关于我' : 'About Me'}
           </h2>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto">
             {language === 'zh'

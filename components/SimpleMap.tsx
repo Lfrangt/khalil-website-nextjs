@@ -26,12 +26,14 @@ export default function SimpleMap() {
       const mapInstance = new mapboxgl.Map({
         container: mapContainer.current,
         style: 'mapbox://styles/mapbox/outdoors-v12',
-        center: wenzhouLocation, // Start at Wenzhou, China
-        zoom: 10, // Close-up view of hometown
+        center: wenzhouLocation,
+        zoom: 10,
         dragRotate: false,
         touchZoomRotate: false,
         attributionControl: false,
         logoPosition: 'bottom-right',
+        // Performance optimizations
+        antialias: true,
       });
 
       map.current = mapInstance;
@@ -45,121 +47,122 @@ export default function SimpleMap() {
         'top-right'
       );
 
-      // Function to animate marker smoothly from one location to another
-      const animateMarker = (
-        marker: mapboxgl.Marker,
-        start: [number, number],
-        end: [number, number],
-        duration: number
-      ) => {
-        const startTime = performance.now();
-        
-        const animate = (currentTime: number) => {
-          const elapsed = currentTime - startTime;
-          const progress = Math.min(elapsed / duration, 1);
-          
-          // Match the map's easing function for perfect synchronization
-          const eased = progress < 0.5
-            ? 2 * progress * progress
-            : -1 + (4 - 2 * progress) * progress;
-          
-          // Interpolate between start and end coordinates
-          const lng = start[0] + (end[0] - start[0]) * eased;
-          const lat = start[1] + (end[1] - start[1]) * eased;
-          
-          marker.setLngLat([lng, lat]);
-          
-          if (progress < 1) {
-            requestAnimationFrame(animate);
-          }
-        };
-        
-        requestAnimationFrame(animate);
-      };
-
       mapInstance.on('load', () => {
         setMapLoaded(true);
 
-        // Smooth continuous journey animation: Wenzhou → Vancouver
-        // Single continuous camera movement for better flow
-        setTimeout(() => {
-          mapInstance.flyTo({
-            center: vancouverLocation, // Fly directly to Vancouver
-            zoom: 10,
-            duration: 3500, // One smooth 3.5 second journey
-            essential: true,
-            curve: 1.2, // Arc of the flight path (lower = more direct)
-            speed: 0.8, // Speed of the flight
-            easing: (t) => {
-              // Custom easing for smooth acceleration and deceleration
-              return t < 0.5
-                ? 2 * t * t
-                : -1 + (4 - 2 * t) * t;
-            }
-          });
-        }, 600); // Start shortly after avatar appears
-
-        // Create a simple wrapper for the marker
+        // Create responsive avatar marker
+        const isMobile = window.innerWidth < 768;
+        const avatarSize = isMobile ? 70 : 90;
+        const halfSize = avatarSize / 2;
+        
+        // Marker wrapper (0x0 for precise positioning)
         const markerWrapper = document.createElement('div');
         markerWrapper.style.width = '0px';
         markerWrapper.style.height = '0px';
         markerWrapper.style.position = 'relative';
         
-        // Create the actual avatar element
+        // Create avatar element with trail effect
         const markerEl = document.createElement('div');
-        
-        // Responsive size based on window width
-        const isMobile = window.innerWidth < 768;
-        const avatarSize = isMobile ? 60 : 80;
-        const halfSize = avatarSize / 2;
-        
-        markerEl.style.position = 'absolute';
-        markerEl.style.left = `-${halfSize}px`;
-        markerEl.style.top = `-${halfSize}px`;
-        markerEl.style.backgroundImage = 'url(/khalil.jpg)';
-        markerEl.style.backgroundSize = 'cover';
-        markerEl.style.backgroundPosition = 'center';
-        markerEl.style.width = `${avatarSize}px`;
-        markerEl.style.height = `${avatarSize}px`;
-        markerEl.style.borderRadius = '50%';
-        markerEl.style.border = isMobile ? '3px solid #ff8a00' : '4px solid #ff8a00';
-        markerEl.style.boxShadow = '0 8px 20px rgba(255, 138, 0, 0.6), 0 0 0 8px rgba(255, 138, 0, 0.2)';
-        markerEl.style.cursor = 'pointer';
-        markerEl.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
-        markerEl.style.opacity = '1'; // Always visible!
-        markerEl.style.animation = 'marker-appear 0.6s ease-out 0.5s both';
-        markerEl.style.willChange = 'transform'; // Optimize for animation performance
-        
-        // Hover effect
-        markerEl.onmouseenter = () => {
-          markerEl.style.transform = 'scale(1.15)';
-          markerEl.style.boxShadow = '0 12px 30px rgba(255, 138, 0, 0.8), 0 0 0 12px rgba(255, 138, 0, 0.3)';
-        };
-        markerEl.onmouseleave = () => {
-          markerEl.style.transform = 'scale(1)';
-          markerEl.style.boxShadow = '0 8px 20px rgba(255, 138, 0, 0.6), 0 0 0 8px rgba(255, 138, 0, 0.2)';
-        };
+        markerEl.style.cssText = `
+          position: absolute;
+          left: -${halfSize}px;
+          top: -${halfSize}px;
+          width: ${avatarSize}px;
+          height: ${avatarSize}px;
+          background-image: url(/khalil.jpg);
+          background-size: cover;
+          background-position: center;
+          border-radius: 50%;
+          border: 4px solid #ff6b00;
+          box-shadow: 
+            0 0 0 4px rgba(255, 107, 0, 0.3),
+            0 0 20px rgba(255, 107, 0, 0.6),
+            0 10px 30px rgba(0, 0, 0, 0.3);
+          cursor: pointer;
+          will-change: transform;
+          transform: translateZ(0);
+          backface-visibility: hidden;
+          animation: avatar-pulse 2s ease-in-out infinite;
+          z-index: 10;
+        `;
         
         markerWrapper.appendChild(markerEl);
 
-        // Add marker - START at Wenzhou (hometown)
+        // Add marker at Wenzhou
         const marker = new mapboxgl.Marker({
           element: markerWrapper,
           anchor: 'center'
         })
-          .setLngLat(wenzhouLocation) // Start at Wenzhou!
+          .setLngLat(wenzhouLocation)
           .addTo(mapInstance);
 
-        // Animate marker flying from Wenzhou to Vancouver
-        // Perfectly synchronized with the map flight animation
-        setTimeout(() => {
-          animateMarker(marker, wenzhouLocation, vancouverLocation, 3500);
-        }, 600); // Start at exact same time as map flight
-        
+        // Smooth journey animation with optimized performance
+        const startJourney = () => {
+          const duration = 3000; // 3 seconds for smooth performance
+          const startTime = performance.now();
+          
+          // Also fly the camera
+          mapInstance.flyTo({
+            center: vancouverLocation,
+            zoom: 10,
+            duration: duration,
+            essential: true,
+            curve: 1.3,
+            speed: 0.9,
+            easing: (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
+          });
+
+          // Animate marker along the path
+          const animate = (currentTime: number) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Smooth easing
+            const eased = progress < 0.5
+              ? 2 * progress * progress
+              : -1 + (4 - 2 * progress) * progress;
+            
+            // Calculate position
+            const lng = wenzhouLocation[0] + (vancouverLocation[0] - wenzhouLocation[0]) * eased;
+            const lat = wenzhouLocation[1] + (vancouverLocation[1] - wenzhouLocation[1]) * eased;
+            
+            // Update marker position
+            marker.setLngLat([lng, lat]);
+            
+            // Add dynamic rotation based on direction
+            const rotation = eased * 360;
+            markerEl.style.transform = `translateZ(0) rotate(${rotation % 360}deg)`;
+            
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            } else {
+              // Arrival animation
+              markerEl.style.transform = 'translateZ(0) scale(1.2)';
+              markerEl.style.boxShadow = `
+                0 0 0 8px rgba(255, 107, 0, 0.4),
+                0 0 40px rgba(255, 107, 0, 0.8),
+                0 15px 40px rgba(0, 0, 0, 0.4)
+              `;
+              setTimeout(() => {
+                markerEl.style.transform = 'translateZ(0) scale(1)';
+                markerEl.style.boxShadow = `
+                  0 0 0 4px rgba(255, 107, 0, 0.3),
+                  0 0 20px rgba(255, 107, 0, 0.6),
+                  0 10px 30px rgba(0, 0, 0, 0.3)
+                `;
+              }, 300);
+            }
+          };
+          
+          requestAnimationFrame(animate);
+        };
+
+        // Start journey after brief pause
+        setTimeout(startJourney, 800);
+
         console.log('🏠 Journey: Wenzhou → Vancouver');
-        console.log('📍 Hometown (Wenzhou, China):', wenzhouLocation);
-        console.log('🎓 Current Home (Vancouver, Canada):', vancouverLocation);
-        console.log('⚠️ Check: Avatar should be at Downtown Vancouver, NOT West Vancouver');
+        console.log('📍 Starting from hometown:', wenzhouLocation);
+        console.log('🎓 Arriving at current home:', vancouverLocation);
       });
 
       mapInstance.on('error', (e) => {
@@ -176,240 +179,226 @@ export default function SimpleMap() {
         map.current = null;
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [language]);
 
   return (
     <div className="relative w-full h-full bg-gray-50 rounded-xl overflow-hidden shadow-2xl touch-action-none">
       <div ref={mapContainer} className="w-full h-full map-container" style={{ minHeight: '400px' }} />
 
-      {/* Flight indicator - Apple Glass Style */}
+      {/* Journey indicator */}
       {mapLoaded && (
-        <div className="absolute top-3 md:top-6 left-1/2 -translate-x-1/2 z-10 flight-indicator">
-          <div className="glass-card-flight">
-            <span className="text-base md:text-lg">✈️</span>
-            <span className="text-[10px] md:text-xs font-medium text-gray-800">
-              {language === 'zh' ? '温州 → 温哥华' : 'Wenzhou → Vancouver'}
-            </span>
-          </div>
-        </div>
-      )}
-
-      {/* Location Badge - Apple Glassmorphism Style */}
-      {mapLoaded && (
-        <div className="absolute bottom-3 md:bottom-6 left-1/2 -translate-x-1/2 z-10 location-badge-journey px-2">
-          <div className="glass-card group">
-            <div className="flex items-center gap-1.5 md:gap-2">
-              <span className="text-sm md:text-base">📍</span>
-              <span className="text-xs md:text-sm font-semibold text-gray-900">
-                {language === 'zh' ? '温哥华，加拿大' : 'Vancouver, Canada'}
-              </span>
-            </div>
-            <div className="glass-subtitle text-[10px] md:text-[11px]">
-              {language === 'zh' ? '温州 🇨🇳 → 温哥华 🍁' : 'Wenzhou 🇨🇳 → Vancouver 🍁'}
+        <div className="absolute top-4 md:top-6 left-1/2 -translate-x-1/2 z-10 animate-journey-fade">
+          <div className="journey-badge">
+            <div className="journey-badge-content">
+              <span className="text-lg md:text-xl">✈️</span>
+              <div className="journey-text">
+                <span className="journey-title">
+                  {language === 'zh' ? '我的旅程' : 'My Journey'}
+                </span>
+                <span className="journey-route">
+                  {language === 'zh' ? '温州 → 温哥华' : 'Wenzhou → Vancouver'}
+                </span>
+              </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* Loading State with enhanced animation */}
+      {/* Location Badge */}
+      {mapLoaded && (
+        <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-10 animate-arrival">
+          <div className="location-badge">
+            <div className="flex items-center gap-2">
+              <span className="text-base md:text-lg">📍</span>
+              <div>
+                <div className="location-name">
+                  {language === 'zh' ? '温哥华' : 'Vancouver'}
+                </div>
+                <div className="location-country">
+                  {language === 'zh' ? '加拿大 🍁' : 'Canada 🍁'}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Loading State */}
       {!mapLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-50 via-purple-50 to-orange-50 loading-screen">
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-50 via-purple-50 to-orange-50">
           <div className="text-center">
-            <div className="loading-spinner mx-auto mb-6"></div>
-            <p className="text-gray-700 text-base font-semibold animate-pulse">
-              {language === 'zh' ? '探索世界中...' : 'Exploring the world...'}
+            <div className="loading-spinner"></div>
+            <p className="mt-4 text-gray-700 text-sm md:text-base font-medium animate-pulse">
+              {language === 'zh' ? '准备起飞...' : 'Preparing for takeoff...'}
             </p>
           </div>
         </div>
       )}
 
-      {/* Global Styles for Map and Enhanced Animations */}
       <style jsx global>{`
-        /* Apple Glassmorphism Card */
-        .glass-card {
-          background: rgba(255, 255, 255, 0.75);
+        /* Performance optimizations */
+        .map-container {
+          will-change: contents;
+          contain: layout style paint;
+        }
+
+        /* Journey Badge */
+        .journey-badge {
+          background: linear-gradient(135deg, 
+            rgba(255, 255, 255, 0.9) 0%, 
+            rgba(255, 255, 255, 0.8) 100%);
           backdrop-filter: blur(20px) saturate(180%);
           -webkit-backdrop-filter: blur(20px) saturate(180%);
-          border: 1px solid rgba(255, 255, 255, 0.8);
-          border-radius: 12px;
-          padding: 8px 12px;
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08),
-                      0 2px 8px rgba(0, 0, 0, 0.04),
-                      inset 0 1px 0 rgba(255, 255, 255, 0.9);
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          cursor: pointer;
-        }
-
-        @media (min-width: 768px) {
-          .glass-card {
-            border-radius: 16px;
-            padding: 10px 16px;
-          }
-        }
-
-        .glass-card:hover {
-          background: rgba(255, 255, 255, 0.85);
-          transform: translateY(-2px) scale(1.02);
-          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12),
-                      0 4px 12px rgba(0, 0, 0, 0.06),
-                      inset 0 1px 0 rgba(255, 255, 255, 1);
-        }
-
-        .glass-subtitle {
-          font-size: 11px;
-          color: rgba(0, 0, 0, 0.5);
-          margin-top: 2px;
-          text-align: center;
-          opacity: 0;
-          transform: translateY(-4px);
-          transition: all 0.3s ease;
-        }
-
-        .glass-card:hover .glass-subtitle {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        .glass-card-flight {
-          background: rgba(255, 255, 255, 0.7);
-          backdrop-filter: blur(20px) saturate(180%);
-          -webkit-backdrop-filter: blur(20px) saturate(180%);
-          border: 1px solid rgba(255, 255, 255, 0.8);
+          border: 1px solid rgba(255, 255, 255, 0.9);
           border-radius: 16px;
-          padding: 6px 10px;
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08),
-                      0 2px 8px rgba(0, 0, 0, 0.04),
-                      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+          padding: 10px 16px;
+          box-shadow: 
+            0 10px 40px rgba(0, 0, 0, 0.1),
+            0 2px 8px rgba(0, 0, 0, 0.05),
+            inset 0 1px 0 rgba(255, 255, 255, 1);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .journey-badge-content {
           display: flex;
           align-items: center;
-          gap: 6px;
+          gap: 10px;
+        }
+
+        .journey-text {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+        }
+
+        .journey-title {
+          font-size: 10px;
+          font-weight: 600;
+          color: rgba(0, 0, 0, 0.5);
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        .journey-route {
+          font-size: 14px;
+          font-weight: 700;
+          color: #ff6b00;
+          background: linear-gradient(135deg, #ff6b00 0%, #ff8a00 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
         @media (min-width: 768px) {
-          .glass-card-flight {
+          .journey-badge {
             border-radius: 20px;
-            padding: 8px 14px;
-            gap: 8px;
+            padding: 12px 20px;
+          }
+          
+          .journey-title {
+            font-size: 11px;
+          }
+          
+          .journey-route {
+            font-size: 16px;
           }
         }
 
-        /* Hide Mapbox logo and attribution */
-        .mapboxgl-ctrl-logo,
-        .mapboxgl-ctrl-attrib,
-        .mapboxgl-ctrl-attrib-button {
-          display: none !important;
-          opacity: 0 !important;
-          visibility: hidden !important;
+        /* Location Badge */
+        .location-badge {
+          background: linear-gradient(135deg, 
+            rgba(255, 255, 255, 0.95) 0%, 
+            rgba(255, 255, 255, 0.85) 100%);
+          backdrop-filter: blur(20px) saturate(180%);
+          -webkit-backdrop-filter: blur(20px) saturate(180%);
+          border: 1.5px solid rgba(255, 107, 0, 0.3);
+          border-radius: 16px;
+          padding: 10px 16px;
+          box-shadow: 
+            0 10px 40px rgba(255, 107, 0, 0.2),
+            0 2px 8px rgba(0, 0, 0, 0.05),
+            inset 0 1px 0 rgba(255, 255, 255, 1);
+          animation: float-badge 3s ease-in-out infinite;
         }
 
-        /* Map container fade-in with scale */
-        .map-container {
-          animation: map-fade-in 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        @keyframes map-fade-in {
-          from {
-            opacity: 0;
-            transform: scale(0.98);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-
-        /* Enhanced loading spinner with gradient and glow */
-        .loading-spinner {
-          width: 70px;
-          height: 70px;
-          border: 6px solid transparent;
-          border-top: 6px solid #ff8a00;
-          border-right: 6px solid #ff5722;
-          border-bottom: 6px solid #ff8a00;
-          border-radius: 50%;
-          animation: spin-glow 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
-          box-shadow: 0 0 20px rgba(255, 138, 0, 0.5);
-        }
-
-        @keyframes spin-glow {
-          0% {
-            transform: rotate(0deg);
-            box-shadow: 0 0 20px rgba(255, 138, 0, 0.5);
-          }
-          50% {
-            box-shadow: 0 0 40px rgba(255, 87, 34, 0.8);
-          }
-          100% {
-            transform: rotate(360deg);
-            box-shadow: 0 0 20px rgba(255, 138, 0, 0.5);
+        @media (min-width: 768px) {
+          .location-badge {
+            border-radius: 20px;
+            padding: 12px 20px;
           }
         }
 
-        /* Loading screen enhanced fade-out */
-        .loading-screen {
-          animation: fade-out-scale 0.8s ease-out forwards;
+        .location-name {
+          font-size: 14px;
+          font-weight: 700;
+          color: #1a1a1a;
         }
 
-        @keyframes fade-out-scale {
-          to {
-            opacity: 0;
-            transform: scale(1.05);
-            pointer-events: none;
+        .location-country {
+          font-size: 11px;
+          font-weight: 500;
+          color: rgba(0, 0, 0, 0.6);
+          margin-top: 2px;
+        }
+
+        @media (min-width: 768px) {
+          .location-name {
+            font-size: 16px;
+          }
+          
+          .location-country {
+            font-size: 12px;
           }
         }
 
-        /* Marker appear animation */
-        @keyframes marker-appear {
-          0% {
-            opacity: 0;
-            transform: scale(0) rotate(0deg);
+        /* Avatar pulse animation */
+        @keyframes avatar-pulse {
+          0%, 100% {
+            box-shadow: 
+              0 0 0 4px rgba(255, 107, 0, 0.3),
+              0 0 20px rgba(255, 107, 0, 0.6),
+              0 10px 30px rgba(0, 0, 0, 0.3);
           }
           50% {
-            transform: scale(1.2) rotate(10deg);
-          }
-          100% {
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
+            box-shadow: 
+              0 0 0 8px rgba(255, 107, 0, 0.2),
+              0 0 40px rgba(255, 107, 0, 0.8),
+              0 15px 40px rgba(0, 0, 0, 0.4);
           }
         }
 
-
-        /* Flight indicator - smooth fade in and out */
-        .flight-indicator {
-          animation: flight-indicator-journey 4.1s ease-in-out both;
-        }
-
-        @keyframes flight-indicator-journey {
+        /* Journey fade animation */
+        @keyframes journey-fade {
           0% {
             opacity: 0;
-            transform: translate(-50%, -20px) scale(0.9);
+            transform: translate(-50%, -30px) scale(0.9);
           }
           10% {
             opacity: 1;
             transform: translate(-50%, 0) scale(1);
           }
-          85% {
+          80% {
             opacity: 1;
             transform: translate(-50%, 0) scale(1);
           }
           100% {
             opacity: 0;
-            transform: translate(-50%, -10px) scale(0.95);
+            transform: translate(-50%, -20px) scale(0.95);
           }
         }
 
-        /* Location badge appears right after arrival */
-        .location-badge-journey {
-          animation: badge-journey-arrive 1s cubic-bezier(0.34, 1.56, 0.64, 1) 4.2s both;
+        .animate-journey-fade {
+          animation: journey-fade 3.8s ease-in-out both;
         }
 
-        @keyframes badge-journey-arrive {
+        /* Arrival animation */
+        @keyframes arrival {
           0% {
             opacity: 0;
-            transform: translate(-50%, 50px) scale(0.8);
+            transform: translate(-50%, 60px) scale(0.7);
           }
           60% {
-            transform: translate(-50%, -5px) scale(1.02);
+            transform: translate(-50%, -8px) scale(1.05);
           }
           100% {
             opacity: 1;
@@ -417,41 +406,79 @@ export default function SimpleMap() {
           }
         }
 
-        /* Continuous float animation for badge */
-        .location-badge-journey > div {
-          animation: float-subtle 3s ease-in-out infinite 5.2s;
+        .animate-arrival {
+          animation: arrival 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 3.8s both;
         }
 
-        @keyframes float-subtle {
+        /* Float animation for badge */
+        @keyframes float-badge {
           0%, 100% {
             transform: translateY(0px);
           }
           50% {
-            transform: translateY(-3px);
+            transform: translateY(-5px);
           }
         }
 
-        /* Smooth map interactions with brightness */
-        .mapboxgl-canvas {
-          transition: filter 0.3s ease, brightness 0.3s ease;
+        /* Loading spinner */
+        .loading-spinner {
+          width: 60px;
+          height: 60px;
+          border: 5px solid rgba(255, 107, 0, 0.2);
+          border-top: 5px solid #ff6b00;
+          border-right: 5px solid #ff8a00;
+          border-radius: 50%;
+          animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+          box-shadow: 0 0 30px rgba(255, 107, 0, 0.4);
+          margin: 0 auto;
         }
 
-        .mapboxgl-canvas:active {
-          cursor: grabbing !important;
-          filter: brightness(0.95);
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
         }
 
-        /* Zoom controls subtle glow */
+        /* Hide Mapbox branding */
+        .mapboxgl-ctrl-logo,
+        .mapboxgl-ctrl-attrib,
+        .mapboxgl-ctrl-attrib-button {
+          display: none !important;
+        }
+
+        /* Smooth map container fade-in */
+        .map-container {
+          animation: map-fade 1s ease-out;
+        }
+
+        @keyframes map-fade {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        /* Optimize zoom controls */
         .mapboxgl-ctrl-group {
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
-          transition: box-shadow 0.3s ease !important;
+          box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1) !important;
+          transition: all 0.3s ease !important;
+          backdrop-filter: blur(10px);
         }
 
         .mapboxgl-ctrl-group:hover {
-          box-shadow: 0 4px 20px rgba(255, 138, 0, 0.3) !important;
+          box-shadow: 0 4px 20px rgba(255, 107, 0, 0.25) !important;
+        }
+
+        /* Smooth canvas interactions */
+        .mapboxgl-canvas {
+          will-change: transform;
         }
       `}</style>
     </div>
   );
 }
-

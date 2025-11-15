@@ -4,6 +4,7 @@ export const translations = {
   zh: {
     nav: {
       home: '首页',
+      influencers: '影响',
       music: '音乐',
       movies: '电影',
       programming: '计算机',
@@ -58,6 +59,7 @@ export const translations = {
   en: {
     nav: {
       home: 'Home',
+      influencers: 'Influencers',
       music: 'Music',
       movies: 'Movies',
       programming: 'Programming',

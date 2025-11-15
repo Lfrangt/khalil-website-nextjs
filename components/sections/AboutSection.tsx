@@ -27,86 +27,83 @@ export default function AboutSection() {
           </p>
         </div>
 
-        {/* Bio Card - Modern glass card */}
-        <div className="glass-card p-8 rounded-2xl border border-white/10 hover:border-orange-500/30 transition-all duration-500 animate-slide-up delay-200">
-          <div className="space-y-6 text-gray-200 leading-relaxed">
-            <p className="text-lg group hover:text-white transition-colors">
-              {language === 'zh' ? (
-                <>
-                  <span className="text-2xl mr-2">⚡</span>
-                  作为一名 <strong className="text-orange-400 group-hover:text-orange-300">Cardano生态DApp开发者</strong>，我专注于构建去中心化应用，探索区块链技术如何改变世界。从智能合约到DApp前端，我享受将想法变为现实的过程。
-                </>
-              ) : (
-                <>
-                  <span className="text-2xl mr-2">⚡</span>
-                  As a <strong className="text-orange-400 group-hover:text-orange-300">Cardano DApp Developer</strong>, I focus on building decentralized applications and exploring how blockchain technology can change the world.
-                </>
-              )}
+        {/* Bio Cards Grid - Clean solid cards */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 animate-slide-up delay-200">
+          {/* Card 1: DApp Developer */}
+          <div className="bg-slate-800 rounded-xl p-6 hover:bg-slate-750 transition-colors duration-300">
+            <div className="text-3xl mb-3">⚡</div>
+            <h3 className="text-lg font-semibold text-white mb-2">
+              {language === 'zh' ? 'DApp 开发' : 'DApp Developer'}
+            </h3>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              {language === 'zh'
+                ? '专注于Cardano生态的去中心化应用开发'
+                : 'Focus on Cardano ecosystem DApp development'}
             </p>
-            <p className="group hover:text-white transition-colors">
-              {language === 'zh' ? (
-                <>
-                  <span className="text-2xl mr-2">🎓</span>
-                  目前在 <strong className="text-cyan-400 group-hover:text-cyan-300">兰加拉学院（Langara College）</strong>攻读计算机科学专业，在学习中不断提升技术能力，为未来的职业道路打下坚实基础。
-                </>
-              ) : (
-                <>
-                  <span className="text-2xl mr-2">🎓</span>
-                  Currently studying <strong className="text-cyan-400 group-hover:text-cyan-300">Computer Science at Langara College</strong>, constantly improving technical skills and building a solid foundation for my career.
-                </>
-              )}
+          </div>
+
+          {/* Card 2: Student */}
+          <div className="bg-slate-800 rounded-xl p-6 hover:bg-slate-750 transition-colors duration-300">
+            <div className="text-3xl mb-3">🎓</div>
+            <h3 className="text-lg font-semibold text-white mb-2">
+              {language === 'zh' ? '计算机科学学生' : 'CS Student'}
+            </h3>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              {language === 'zh'
+                ? '在兰加拉学院学习计算机科学'
+                : 'Studying CS at Langara College'}
             </p>
-            <p className="group hover:text-white transition-colors">
-              {language === 'zh' ? (
-                <>
-                  <span className="text-2xl mr-2">🌏</span>
-                  来自中国<strong className="text-pink-400 group-hover:text-pink-300">温州</strong>，现居<strong className="text-pink-400 group-hover:text-pink-300">温哥华</strong>。跨文化的生活经历让我拥有更开阔的视野和包容的心态。
-                </>
-              ) : (
-                <>
-                  <span className="text-2xl mr-2">🌏</span>
-                  From <strong className="text-pink-400 group-hover:text-pink-300">Wenzhou, China</strong>, now living in <strong className="text-pink-400 group-hover:text-pink-300">Vancouver</strong>. Cross-cultural experiences give me a broader perspective and inclusive mindset.
-                </>
-              )}
+          </div>
+
+          {/* Card 3: Location */}
+          <div className="bg-slate-800 rounded-xl p-6 hover:bg-slate-750 transition-colors duration-300">
+            <div className="text-3xl mb-3">🌏</div>
+            <h3 className="text-lg font-semibold text-white mb-2">
+              {language === 'zh' ? '温州 → 温哥华' : 'Wenzhou → Vancouver'}
+            </h3>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              {language === 'zh'
+                ? '来自温州，现居温哥华'
+                : 'From Wenzhou, now in Vancouver'}
             </p>
-            <p className="group hover:text-white transition-colors">
-              {language === 'zh' ? (
-                <>
-                  <span className="text-2xl mr-2">🔗</span>
-                  精通<strong className="text-purple-400 group-hover:text-purple-300">区块链技术和智能合约开发</strong>，特别是Cardano生态系统。深入研究Plutus、Lucid等开发工具，构建安全高效的去中心化应用。
-                </>
-              ) : (
-                <>
-                  <span className="text-2xl mr-2">🔗</span>
-                  Proficient in <strong className="text-purple-400 group-hover:text-purple-300">blockchain technology and smart contract development</strong>, especially the Cardano ecosystem. Deep research in Plutus, Lucid and other tools.
-                </>
-              )}
+          </div>
+
+          {/* Card 4: Blockchain */}
+          <div className="bg-slate-800 rounded-xl p-6 hover:bg-slate-750 transition-colors duration-300">
+            <div className="text-3xl mb-3">🔗</div>
+            <h3 className="text-lg font-semibold text-white mb-2">
+              {language === 'zh' ? '区块链学习' : 'Blockchain Learning'}
+            </h3>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              {language === 'zh'
+                ? '学习智能合约与Plutus、Lucid开发'
+                : 'Learning smart contracts, Plutus & Lucid'}
             </p>
-            <p className="group hover:text-white transition-colors">
-              {language === 'zh' ? (
-                <>
-                  <span className="text-2xl mr-2">🎸</span>
-                  <strong className="text-pink-400 group-hover:text-pink-300">音乐爱好者</strong>，擅长<strong className="text-pink-400 group-hover:text-pink-300">电吉他和钢琴</strong>。音乐让我在技术之外找到另一种表达自我的方式，从R&B到Funk，音乐是我生活的重要部分。
-                </>
-              ) : (
-                <>
-                  <span className="text-2xl mr-2">🎸</span>
-                  <strong className="text-pink-400 group-hover:text-pink-300">Music enthusiast</strong>, proficient in <strong className="text-pink-400 group-hover:text-pink-300">electric guitar and piano</strong>. Music is another way of self-expression beyond technology.
-                </>
-              )}
+          </div>
+
+          {/* Card 5: Music */}
+          <div className="bg-slate-800 rounded-xl p-6 hover:bg-slate-750 transition-colors duration-300">
+            <div className="text-3xl mb-3">🎸</div>
+            <h3 className="text-lg font-semibold text-white mb-2">
+              {language === 'zh' ? '音乐爱好' : 'Music Lover'}
+            </h3>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              {language === 'zh'
+                ? '电吉他和钢琴，R&B和Funk'
+                : 'Electric guitar & piano, R&B & Funk'}
             </p>
-            <p className="group hover:text-white transition-colors">
-              {language === 'zh' ? (
-                <>
-                  <span className="text-2xl mr-2">🚀</span>
-                  创立了 <strong className="text-orange-400 group-hover:text-orange-300">Abundra Capital</strong>，专注于AI、区块链和数字资产的创新项目。通过整合前沿技术，探索未来金融基础设施的可能性。
-                </>
-              ) : (
-                <>
-                  <span className="text-2xl mr-2">🚀</span>
-                  Founded <strong className="text-orange-400 group-hover:text-orange-300">Abundra Capital</strong>, focusing on AI, blockchain and digital assets innovation. Exploring future financial infrastructure possibilities.
-                </>
-              )}
+          </div>
+
+          {/* Card 6: Entrepreneur */}
+          <div className="bg-slate-800 rounded-xl p-6 hover:bg-slate-750 transition-colors duration-300">
+            <div className="text-3xl mb-3">🚀</div>
+            <h3 className="text-lg font-semibold text-white mb-2">
+              Abundra Capital
+            </h3>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              {language === 'zh'
+                ? '探索AI与区块链创新'
+                : 'Exploring AI & blockchain innovation'}
             </p>
           </div>
         </div>

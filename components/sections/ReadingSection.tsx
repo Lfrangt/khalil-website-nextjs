@@ -196,16 +196,9 @@ export default function ReadingSection() {
                     </div>
                   </div>
 
-                  <p className="text-sm text-gray-50 leading-relaxed mb-3">
+                  <p className="text-sm text-gray-50 leading-relaxed">
                     {language === 'zh' ? book.review : book.reviewEn}
                   </p>
-
-                  <div className="flex items-center justify-between pt-3 border-t border-white/20">
-                    <span className="text-xs text-gray-400 font-medium uppercase">
-                      {language === 'zh' ? '评分' : 'Rating'}
-                    </span>
-                    <span className="text-sm font-bold text-yellow-400">{book.rating}</span>
-                  </div>
                 </div>
               ))}
             </div>

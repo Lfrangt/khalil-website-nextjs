@@ -151,10 +151,6 @@ export default function MoviesSection() {
                       <div className="absolute top-4 left-4 glass-card text-white px-3 py-1.5 rounded-lg text-xs font-bold z-10 shadow-lg">
                         {movie.year}
                       </div>
-                      {/* Rating Badge */}
-                      <div className="absolute top-4 right-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-3 py-1.5 rounded-lg text-xs font-bold z-10 shadow-lg">
-                        ⭐ {movie.rating}
-                      </div>
                     </div>
                   </div>
 

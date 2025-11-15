@@ -15,22 +15,22 @@ export default function ProgrammingSection() {
       detailedDescriptionEn: 'Abundra Capital is an innovative project I founded, aiming to combine AI technology, blockchain, and traditional investment management. The project includes three core modules: AI Lab for developing intelligent investment analysis tools, Blockchain R&D focusing on DeFi protocols and smart contracts, and Digital Capital for digital asset allocation and management.',
       tags: ['AI', 'Blockchain', 'Web3', 'DeFi', 'Cardano'],
       tech: ['Python', 'Plutus', 'Haskell', 'React', 'Machine Learning'],
-      status: '开发中',
-      statusEn: 'In Development',
-      link: '#',
+      status: '建设中',
+      statusEn: 'Building',
+      link: 'https://abundra-website.vercel.app',
     },
     {
-      title: 'Cardano DApp 项目',
-      titleEn: 'Cardano DApp Projects',
-      description: '基于Cardano区块链的去中心化应用开发',
-      descriptionEn: 'Decentralized applications built on Cardano blockchain',
-      detailedDescription: '我正在学习和开发多个Cardano生态的DApp项目。主要使用Plutus语言编写智能合约，处理链上逻辑和资产交互。前端使用Lucid库与Cardano区块链集成，实现钱包连接、交易构建和链上数据查询。项目包括NFT市场、DeFi借贷协议和去中心化治理系统。通过这些项目，我深入理解了eUTxO模型和函数式编程在区块链中的应用。',
-      detailedDescriptionEn: 'I am learning and developing multiple DApp projects in the Cardano ecosystem. Using Plutus language for smart contracts, handling on-chain logic and asset interactions. Frontend integrates with Cardano blockchain using Lucid library, implementing wallet connection, transaction building, and on-chain data queries.',
-      tags: ['Cardano', 'Plutus', 'Smart Contracts', 'eUTxO', 'Lucid'],
-      tech: ['Haskell', 'Plutus', 'TypeScript', 'Lucid', 'Blockfrost API'],
-      status: '学习中',
-      statusEn: 'Learning',
-      link: '#',
+      title: 'Cardano Identity DApp',
+      titleEn: 'Cardano Identity DApp',
+      description: '基于Cardano区块链的去中心化身份验证应用',
+      descriptionEn: 'Decentralized identity verification application built on Cardano blockchain',
+      detailedDescription: '这是我正在开发的Cardano生态DApp项目，致力于实现去中心化身份验证功能。使用Plutus语言编写智能合约，处理链上身份数据和验证逻辑。前端使用Lucid库与Cardano区块链集成，实现钱包连接、交易构建和链上数据查询。通过这个项目，我正在深入学习eUTxO模型和Cardano的去中心化身份(DID)实现。',
+      detailedDescriptionEn: 'This is my ongoing Cardano DApp project implementing decentralized identity verification. Using Plutus for smart contracts to handle on-chain identity data and verification logic. Frontend integrates with Cardano blockchain using Lucid library for wallet connection, transaction building, and on-chain queries.',
+      tags: ['Cardano', 'DID', 'Smart Contracts', 'eUTxO', 'Lucid'],
+      tech: ['Plutus', 'TypeScript', 'Lucid', 'Blockfrost API', 'Next.js'],
+      status: '建设中',
+      statusEn: 'Building',
+      link: 'https://cardano-identity-dapp.vercel.app/app',
     },
     {
       title: '个人网站',
@@ -134,27 +134,6 @@ export default function ProgrammingSection() {
       goalEn: 'Contribute to Cardano ecosystem',
       description: '开发开源工具和库，帮助更多开发者进入Cardano生态',
       descriptionEn: 'Develop open-source tools and libraries to help more developers enter the Cardano ecosystem',
-    },
-  ];
-
-  const learningTools = [
-    {
-      name: 'ChatGPT',
-      icon: '🤖',
-      description: '利用ChatGPT辅助学习编程概念，解决代码问题，以及了解最新的技术趋势。它帮助我理解复杂概念并提供实用编程示例。',
-      descriptionEn: 'Using ChatGPT to assist in learning programming concepts, solving code problems, and understanding the latest tech trends. It helps me understand complex concepts and provides practical programming examples.',
-    },
-    {
-      name: 'Grok',
-      icon: '🧠',
-      description: '使用Grok探索AI与编程的结合，获取创新的解决方案和独特的编程思路，拓展我的技术视野。',
-      descriptionEn: 'Using Grok to explore the integration of AI and programming, obtaining innovative solutions and unique programming insights, expanding my technical horizons.',
-    },
-    {
-      name: 'Cursor',
-      icon: '💻',
-      description: 'Cursor作为我的主力IDE，它的AI辅助编码功能大大提高了我的开发效率，让我能够更快地实现想法和解决问题。',
-      descriptionEn: 'Cursor as my main IDE, its AI-assisted coding features greatly improve my development efficiency, allowing me to implement ideas and solve problems faster.',
     },
   ];
 
@@ -281,37 +260,6 @@ export default function ProgrammingSection() {
           </p>
         </div>
 
-        {/* Learning Journey */}
-        <div>
-          <h3 className="text-2xl font-bold text-white mb-4 text-center">
-            {language === 'zh' ? '我的自学之旅' : 'My Self-Learning Journey'}
-          </h3>
-          <p className="text-gray-100 text-center max-w-3xl mx-auto mb-8 leading-relaxed">
-            {language === 'zh'
-              ? '作为Cardano生态的DApp开发者，我专注于构建去中心化应用和智能合约。通过深入研究Cardano的技术架构和开发生态，我致力于推动Web3技术的创新和应用。'
-              : 'As a Cardano DApp developer, I focus on building decentralized applications and smart contracts. Through in-depth research of Cardano\'s technical architecture and development ecosystem, I am committed to promoting Web3 technology innovation and application.'}
-          </p>
-          <p className="text-gray-100 text-center mb-8">
-            {language === 'zh' ? '我的学习过程中主要依靠以下工具与方法：' : 'My learning process mainly relies on the following tools and methods:'}
-          </p>
-          <div className="grid md:grid-cols-3 gap-6">
-            {learningTools.map((tool, index) => (
-              <div key={index} className="glass-card rounded-xl p-6 text-center animate-fade-in transition-all duration-500" style={{ animationDelay: `${index * 100}ms` }}>
-                <div className="text-5xl mb-4">{tool.icon}</div>
-                <h4 className="text-lg font-bold text-white mb-3">{tool.name}</h4>
-                <p className="text-sm text-gray-100 leading-relaxed">
-                  {language === 'zh' ? tool.description : tool.descriptionEn}
-                </p>
-              </div>
-            ))}
-          </div>
-          <p className="text-gray-100 text-center max-w-3xl mx-auto mt-8 leading-relaxed">
-            {language === 'zh'
-              ? '通过这些工具的辅助，我在Web开发、区块链技术和AI领域取得了显著的学习成果，并且培养了自主解决问题的能力。'
-              : 'With the help of these tools, I have achieved significant learning results in web development, blockchain technology, and AI, and have developed the ability to solve problems independently.'}
-          </p>
-        </div>
-
         {/* Projects Grid */}
         <div>
           <h3 className="text-2xl font-bold text-white mb-8 text-center">
@@ -324,12 +272,12 @@ export default function ProgrammingSection() {
                   <h3 className="text-xl font-bold text-white">
                     {language === 'zh' ? project.title : project.titleEn}
                   </h3>
-                  <span className={`px-3 py-1 text-xs rounded-full ${
+                  <span className={`px-3 py-1 text-xs rounded-full font-medium ${
                     project.status === '已完成' || project.statusEn === 'Completed'
-                      ? 'bg-green-100 text-green-700'
-                      : project.status === '开发中' || project.statusEn === 'In Development'
-                      ? 'bg-blue-100 text-blue-700'
-                      : 'bg-yellow-100 text-yellow-700'
+                      ? 'bg-green-500/20 text-green-400 border border-green-500/30'
+                      : project.status === '开发中' || project.status === '建设中' || project.statusEn === 'In Development' || project.statusEn === 'Building'
+                      ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                      : 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
                   }`}>
                     {language === 'zh' ? project.status : project.statusEn}
                   </span>
@@ -368,37 +316,43 @@ export default function ProgrammingSection() {
                     </div>
                   </div>
                 </div>
+
+                {/* Project Link */}
+                {project.link && project.link !== '#' && (
+                  <div className="mt-4 pt-4 border-t border-white/10">
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg text-sm font-medium transition-colors"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                      {language === 'zh' ? '访问项目' : 'Visit Project'}
+                    </a>
+                  </div>
+                )}
               </div>
             ))}
           </div>
         </div>
 
-        {/* Skills by Category */}
+        {/* Tech Stack */}
         <div>
           <h3 className="text-2xl font-bold text-white mb-8 text-center">
-            {language === 'zh' ? '技能树' : 'Skill Tree'}
+            {language === 'zh' ? '技术栈' : 'Tech Stack'}
           </h3>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {skillCategories.map((category, catIndex) => (
-              <div key={catIndex} className="glass-card rounded-xl p-6 animate-fade-in transition-all duration-500" style={{ animationDelay: `${catIndex * 100}ms` }}>
-                <h4 className="text-lg font-bold text-white mb-4 pb-2 border-b border-white/20">
+              <div key={catIndex} className="bg-slate-800 rounded-xl p-6 animate-fade-in" style={{ animationDelay: `${catIndex * 100}ms` }}>
+                <h4 className="text-base font-semibold text-white mb-4">
                   {language === 'zh' ? category.category : category.categoryEn}
                 </h4>
-                <div className="space-y-4">
+                <div className="space-y-2">
                   {category.skills.map((skill) => (
-                    <div key={skill.name}>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-sm font-medium text-gray-50">
-                          {language === 'zh' ? skill.name : (skill.nameEn || skill.name)}
-                        </span>
-                        <span className="text-sm text-gray-500 font-medium">{skill.level}%</span>
-                      </div>
-                      <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
-                        <div
-                          className="bg-gradient-to-r from-green-500 to-emerald-500 h-full rounded-full transition-all duration-1000 ease-out"
-                          style={{ width: `${skill.level}%` }}
-                        />
-                      </div>
+                    <div key={skill.name} className="text-sm text-gray-300">
+                      • {language === 'zh' ? skill.name : (skill.nameEn || skill.name)}
                     </div>
                   ))}
                 </div>
