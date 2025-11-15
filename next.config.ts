@@ -20,6 +20,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'img9.doubanio.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'img3.doubanio.com',
+      },
     ],
   },
 };
