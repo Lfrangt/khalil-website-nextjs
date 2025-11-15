@@ -16,6 +16,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'img2.doubanio.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'img9.doubanio.com',
+      },
     ],
   },
 };

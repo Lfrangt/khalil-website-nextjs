@@ -8,15 +8,15 @@ export default function ReadingSection() {
 
   const books = [
     {
-      title: '美国宪政历程',
-      titleEn: '25 Landmark Cases',
-      author: '任东来等',
-      authorEn: 'Ren Donglai',
-      cover: '/images/books/IMG_2072.JPG',
-      review: '通过25个司法案例深入理解美国宪政精神，法治如何塑造现代社会。',
-      reviewEn: 'Understanding American constitutional spirit through 25 judicial cases, how rule of law shapes modern society.',
-      category: '法律',
-      categoryEn: 'Law',
+      title: '昨日的世界',
+      titleEn: 'The World of Yesterday',
+      author: '斯蒂芬·茨威格',
+      authorEn: 'Stefan Zweig',
+      cover: '/images/books/IMG_2071.jpg',
+      review: '茨威格对一战前欧洲黄金时代的回忆，让我深刻理解和平与文明的珍贵。',
+      reviewEn: 'Zweig\'s memories of Europe\'s golden age before WWI made me deeply understand the preciousness of peace and civilization.',
+      category: '历史',
+      categoryEn: 'History',
     },
     {
       title: '查拉图斯特拉如是说',
@@ -63,15 +63,15 @@ export default function ReadingSection() {
       categoryEn: 'Biography',
     },
     {
-      title: '黄仁勋传记',
-      titleEn: 'Jensen Huang Biography',
-      author: 'Stephen Witt',
-      authorEn: 'Stephen Witt',
-      cover: '/images/books/IMG_2074.JPG',
-      review: '30年坚持GPU技术，最终引领AI革命。他的故事告诉我技术积累需要时间和耐心。',
-      reviewEn: '30-year dedication to GPU technology that ultimately led the AI revolution. His story taught me technical accumulation requires time and patience.',
-      category: '传记',
-      categoryEn: 'Biography',
+      title: '美国宪政历程',
+      titleEn: '25 Landmark Cases',
+      author: '任东来等',
+      authorEn: 'Ren Donglai',
+      cover: '/images/books/IMG_2072.JPG',
+      review: '通过25个司法案例深入理解美国宪政精神，法治如何塑造现代社会。',
+      reviewEn: 'Understanding American constitutional spirit through 25 judicial cases, how rule of law shapes modern society.',
+      category: '法律',
+      categoryEn: 'Law',
     },
     {
       title: '在轮下',
@@ -85,15 +85,15 @@ export default function ReadingSection() {
       categoryEn: 'Novel',
     },
     {
-      title: '昨日的世界',
-      titleEn: 'The World of Yesterday',
-      author: '斯蒂芬·茨威格',
-      authorEn: 'Stefan Zweig',
-      cover: '/images/books/IMG_2071.jpg',
-      review: '茨威格对一战前欧洲黄金时代的回忆，让我深刻理解和平与文明的珍贵。',
-      reviewEn: 'Zweig\'s memories of Europe\'s golden age before WWI made me deeply understand the preciousness of peace and civilization.',
-      category: '历史',
-      categoryEn: 'History',
+      title: '黄仁勋传记',
+      titleEn: 'Jensen Huang Biography',
+      author: 'Stephen Witt',
+      authorEn: 'Stephen Witt',
+      cover: '/images/books/IMG_2074.JPG',
+      review: '30年坚持GPU技术，最终引领AI革命。他的故事告诉我技术积累需要时间和耐心。',
+      reviewEn: '30-year dedication to GPU technology that ultimately led the AI revolution. His story taught me technical accumulation requires time and patience.',
+      category: '传记',
+      categoryEn: 'Biography',
     },
     {
       title: '舞！舞！舞！',
@@ -111,7 +111,7 @@ export default function ReadingSection() {
       titleEn: '1984',
       author: '乔治·奥威尔',
       authorEn: 'George Orwell',
-      cover: 'https://img2.doubanio.com/view/subject/l/public/s4371408.jpg',
+      cover: 'https://img9.doubanio.com/view/subject/l/public/s4371408.jpg',
       review: '奥威尔对极权主义的深刻警示。"老大哥在看着你"这句话让我时刻保持对权力的警惕。',
       reviewEn: 'Orwell\'s profound warning against totalitarianism. "Big Brother is watching you" reminds me to stay vigilant about power.',
       category: '小说',
@@ -151,17 +151,6 @@ export default function ReadingSection() {
       categoryEn: 'Philosophy',
     },
     {
-      title: '论法的精神',
-      titleEn: 'The Spirit of Laws',
-      author: '孟德斯鸠',
-      authorEn: 'Montesquieu',
-      cover: 'https://img2.doubanio.com/view/subject/l/public/s1561631.jpg',
-      review: '三权分立理论的源头。孟德斯鸠对政治制度的分析影响了整个现代民主世界。',
-      reviewEn: 'Origin of separation of powers. Montesquieu\'s analysis of political systems influenced the entire modern democratic world.',
-      category: '法律',
-      categoryEn: 'Law',
-    },
-    {
       title: '追忆似水年华',
       titleEn: 'In Search of Lost Time',
       author: '马塞尔·普鲁斯特',
@@ -182,6 +171,17 @@ export default function ReadingSection() {
       reviewEn: 'Munger\'s mental models completely changed my thinking. Interdisciplinary learning and lifelong reading became my life guide.',
       category: '投资',
       categoryEn: 'Investing',
+    },
+    {
+      title: '论法的精神',
+      titleEn: 'The Spirit of Laws',
+      author: '孟德斯鸠',
+      authorEn: 'Montesquieu',
+      cover: 'https://img2.doubanio.com/view/subject/l/public/s1561631.jpg',
+      review: '三权分立理论的源头。孟德斯鸠对政治制度的分析影响了整个现代民主世界。',
+      reviewEn: 'Origin of separation of powers. Montesquieu\'s analysis of political systems influenced the entire modern democratic world.',
+      category: '法律',
+      categoryEn: 'Law',
     },
   ];
 
@@ -254,7 +254,7 @@ export default function ReadingSection() {
                 <div className="absolute top-2 right-2">
                   <span className="inline-block px-2 py-1 bg-black/60 backdrop-blur-sm text-white text-xs rounded border border-white/20">
                     {language === 'zh' ? book.category : book.categoryEn}
-                  </span>
+                    </span>
                 </div>
               </div>
               
@@ -269,7 +269,7 @@ export default function ReadingSection() {
               </div>
             </div>
           ))}
-        </div>
+          </div>
 
         {/* Reading Goals */}
         <div>
