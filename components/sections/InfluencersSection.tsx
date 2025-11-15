@@ -156,12 +156,12 @@ export default function InfluencersSection() {
           {influencers.map((person, index) => (
             <div
               key={index}
-              className="glass-card rounded-xl p-6 animate-fade-in transition-all duration-500 hover:scale-[1.02]"
+              className="glass-card influencer-card rounded-xl p-6 animate-fade-in"
               style={{ animationDelay: `${index * 80}ms` }}
             >
               <div className="flex gap-4 mb-4">
                 {/* Avatar */}
-                <div className="flex-shrink-0 w-20 h-20 rounded-full overflow-hidden ring-2 ring-orange-500/30 bg-slate-800">
+                <div className="flex-shrink-0 w-20 h-20 rounded-full overflow-hidden ring-2 ring-orange-500/30 bg-slate-800 avatar-ring image-zoom">
                   <Image
                     src={person.image}
                     alt={language === 'zh' ? person.nameZh : person.name}
@@ -201,7 +201,7 @@ export default function InfluencersSection() {
                 {(language === 'zh' ? person.tags : person.tagsEn).map((tag, idx) => (
                   <span
                     key={idx}
-                    className="inline-block px-3 py-1 bg-white/5 text-gray-400 text-xs rounded border border-white/10"
+                    className="inline-block px-3 py-1 bg-white/5 text-gray-400 text-xs rounded border border-white/10 tag-item cursor-pointer"
                   >
                     {tag}
                   </span>

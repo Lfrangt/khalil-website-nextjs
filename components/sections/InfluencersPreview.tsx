@@ -70,11 +70,11 @@ export default function InfluencersPreview() {
           {influencers.map((person, index) => (
             <div
               key={index}
-              className="glass-card rounded-xl p-6 animate-fade-in transition-all duration-500 hover:scale-[1.02]"
+              className="glass-card preview-card rounded-xl p-6 animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Avatar */}
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full overflow-hidden ring-2 ring-orange-500/30 bg-slate-800">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full overflow-hidden ring-2 ring-orange-500/30 bg-slate-800 avatar-ring image-zoom">
                 <Image
                   src={person.image}
                   alt={language === 'zh' ? person.nameZh : person.name}
@@ -107,7 +107,7 @@ export default function InfluencersPreview() {
                 {(language === 'zh' ? person.tags : person.tagsEn).map((tag, idx) => (
                   <span
                     key={idx}
-                    className="inline-block px-2 py-1 bg-white/5 text-gray-400 text-xs rounded border border-white/10"
+                    className="inline-block px-2 py-1 bg-white/5 text-gray-400 text-xs rounded border border-white/10 tag-item cursor-pointer"
                   >
                     {tag}
                   </span>
@@ -121,10 +121,10 @@ export default function InfluencersPreview() {
         <div className="text-center animate-fade-in" style={{ animationDelay: '300ms' }}>
           <Link
             href="/influencers"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition-all text-sm font-medium"
+            className="group inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-cyan-500 hover:from-orange-600 hover:to-cyan-600 text-white rounded-lg transition-all text-sm font-medium shadow-lg hover:shadow-xl hover:scale-105"
           >
             {language === 'zh' ? '查看更多影响我的人' : 'View More Influencers'}
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </Link>
