@@ -70,29 +70,29 @@ export default function InfluencersPreview() {
           {influencers.map((person, index) => (
             <div
               key={index}
-              className="glass-card preview-card rounded-xl p-6 animate-fade-in"
+              className="group glass-card rounded-xl p-6 animate-fade-in transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:-translate-y-2"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Avatar */}
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full overflow-hidden ring-2 ring-orange-500/30 bg-slate-800 avatar-ring image-zoom">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full overflow-hidden ring-2 ring-orange-500/30 bg-slate-800 transition-all duration-300 group-hover:ring-4 group-hover:ring-orange-500/50 group-hover:scale-110">
                 <Image
                   src={person.image}
                   alt={language === 'zh' ? person.nameZh : person.name}
                   width={64}
                   height={64}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
               </div>
               
               {/* Name & Title */}
               <div className="text-center mb-3">
-                <h3 className="text-lg font-bold text-white mb-1">
+                <h3 className="text-lg font-bold text-white mb-1 transition-colors duration-300 group-hover:text-orange-400">
                   {language === 'zh' ? person.nameZh : person.name}
                 </h3>
                 <p className="text-xs text-gray-400 mb-2">
                   {language === 'zh' ? person.title : person.titleEn}
                 </p>
-                <span className="inline-block px-2 py-1 bg-white/10 text-gray-100 text-xs rounded-full border border-white/20">
+                <span className="inline-block px-2 py-1 bg-white/10 text-gray-100 text-xs rounded-full border border-white/20 transition-all duration-300 group-hover:bg-orange-500/20 group-hover:border-orange-500/40">
                   📚 {language === 'zh' ? person.book : person.bookEn}
                 </span>
               </div>
@@ -107,7 +107,7 @@ export default function InfluencersPreview() {
                 {(language === 'zh' ? person.tags : person.tagsEn).map((tag, idx) => (
                   <span
                     key={idx}
-                    className="inline-block px-2 py-1 bg-white/5 text-gray-400 text-xs rounded border border-white/10 tag-item cursor-pointer"
+                    className="inline-block px-2 py-1 bg-white/5 text-gray-400 text-xs rounded border border-white/10 transition-all duration-200 hover:bg-orange-500/20 hover:text-orange-300 hover:border-orange-500/40 cursor-pointer"
                   >
                     {tag}
                   </span>

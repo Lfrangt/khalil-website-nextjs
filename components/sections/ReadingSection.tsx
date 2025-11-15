@@ -1,130 +1,99 @@
 'use client';
 
+import Image from 'next/image';
 import { useLanguage } from '@/lib/LanguageContext';
 
 export default function ReadingSection() {
   const { language } = useLanguage();
 
-  const bookCategories = [
+  const books = [
     {
-      category: '投资与商业',
-      categoryEn: 'Investing & Business',
-      books: [
-        {
-          title: '穷查理宝典',
-          titleEn: 'Poor Charlie\'s Almanack',
-          author: 'Charles Munger',
-          review: '查理·芒格的智慧结晶，教会我用多元思维模型看待世界。投资不仅是选股，更是一种跨学科的思维方式。',
-          reviewEn: 'Charlie Munger\'s wisdom crystallized. Taught me to view the world through mental models. Investing is not just stock picking, but an interdisciplinary way of thinking.',
-          rating: '10/10',
-        },
-        {
-          title: '聪明的投资者',
-          titleEn: 'The Intelligent Investor',
-          author: 'Benjamin Graham',
-          review: '价值投资的圣经，巴菲特称这本书改变了他的一生。教会我区分投资与投机，寻找安全边际。',
-          reviewEn: 'The bible of value investing. Buffett said this book changed his life. Taught me to distinguish investment from speculation and find the margin of safety.',
-          rating: '9.5/10',
-        },
-        {
-          title: '原则',
-          titleEn: 'Principles',
-          author: 'Ray Dalio',
-          review: '达利欧的生活和工作原则，系统化决策的方法论。将复杂问题简化，用原则指导行动。',
-          reviewEn: 'Dalio\'s life and work principles, a systematic decision-making methodology. Simplify complex problems and guide actions with principles.',
-          rating: '9/10',
-        },
-      ],
+      title: '埃隆·马斯克传',
+      titleEn: 'Elon Musk',
+      author: '沃尔特·艾萨克森',
+      authorEn: 'Walter Isaacson',
+      cover: 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1692288251i/122765395.jpg',
+      review: '深入了解马斯克的思维方式和第一性原理。他敢于挑战不可能，用行动改变世界的精神深深影响了我。',
+      reviewEn: 'Deep dive into Musk\'s thinking and first principles. His courage to challenge the impossible and change the world through action profoundly influenced me.',
+      category: '传记',
+      categoryEn: 'Biography',
     },
     {
-      category: '技术与创新',
-      categoryEn: 'Technology & Innovation',
-      books: [
-        {
-          title: 'Mastering Blockchain',
-          titleEn: 'Mastering Blockchain',
-          author: 'Imran Bashir',
-          review: '深入理解区块链技术的底层原理。从密码学到共识机制，为我的Cardano开发打下坚实基础。',
-          reviewEn: 'Deep understanding of blockchain fundamentals. From cryptography to consensus mechanisms, laid a solid foundation for my Cardano development.',
-          rating: '9/10',
-        },
-        {
-          title: 'The Innovator\'s Dilemma',
-          titleEn: 'The Innovator\'s Dilemma',
-          author: 'Clayton Christensen',
-          review: '颠覆式创新理论的经典之作。解释了为什么优秀的公司也会失败，对理解科技行业变革很有启发。',
-          reviewEn: 'Classic work on disruptive innovation theory. Explains why great companies fail, insightful for understanding tech industry transformation.',
-          rating: '8.5/10',
-        },
-        {
-          title: 'Algorithms to Live By',
-          titleEn: 'Algorithms to Live By',
-          author: 'Brian Christian',
-          review: '将计算机科学的算法应用到日常生活决策中。原来算法不仅在代码里，也在生活的每个角落。',
-          reviewEn: 'Applying computer science algorithms to daily life decisions. Algorithms are not just in code, but in every corner of life.',
-          rating: '8.5/10',
-        },
-      ],
+      title: '奥尔特曼传记',
+      titleEn: 'Sam Altman',
+      author: '周恒星',
+      authorEn: 'Zhou Hengxing',
+      cover: 'https://img2.doubanio.com/view/subject/l/public/s34923804.jpg',
+      review: 'AI时代的先驱，从Y Combinator到OpenAI的历程让我看到了技术如何真正改变人类未来。',
+      reviewEn: 'AI era pioneer. His journey from Y Combinator to OpenAI showed me how technology can truly transform humanity\'s future.',
+      category: '传记',
+      categoryEn: 'Biography',
     },
     {
-      category: '自我提升',
-      categoryEn: 'Self-Improvement',
-      books: [
-        {
-          title: '认知觉醒',
-          titleEn: 'Cognitive Awakening',
-          author: '周岭',
-          review: '关于自我认知和成长的深度思考。如何打破思维定势，保持持续学习和进步。',
-          reviewEn: 'Deep thoughts on self-awareness and growth. How to break mental patterns and maintain continuous learning and progress.',
-          rating: '9/10',
-        },
-        {
-          title: '深度工作',
-          titleEn: 'Deep Work',
-          author: 'Cal Newport',
-          review: '在信息爆炸的时代，深度工作能力变得越来越稀缺和珍贵。这本书教我如何培养专注力。',
-          reviewEn: 'In the age of information explosion, deep work ability becomes increasingly scarce and valuable. This book taught me how to cultivate focus.',
-          rating: '9/10',
-        },
-        {
-          title: 'Atomic Habits',
-          titleEn: 'Atomic Habits',
-          author: 'James Clear',
-          review: '微小习惯的力量。1%的每日进步，一年后将是37倍的提升。习惯塑造人生。',
-          reviewEn: 'The power of tiny habits. 1% daily improvement becomes 37x improvement in a year. Habits shape life.',
-          rating: '9.5/10',
-        },
-      ],
+      title: '黄仁勋传记',
+      titleEn: 'Jensen Huang Biography',
+      author: 'Stephen Witt',
+      authorEn: 'Stephen Witt',
+      cover: 'https://m.media-amazon.com/images/I/71iPW7gAzmL._AC_UF1000,1000_QL80_.jpg',
+      review: '30年坚持GPU技术，最终引领AI革命。他的故事告诉我技术积累需要时间和耐心。',
+      reviewEn: '30-year dedication to GPU technology that ultimately led the AI revolution. His story taught me technical accumulation requires time and patience.',
+      category: '传记',
+      categoryEn: 'Biography',
     },
     {
-      category: '人文思考',
-      categoryEn: 'Humanities',
-      books: [
-        {
-          title: '人类简史',
-          titleEn: 'Sapiens',
-          author: 'Yuval Noah Harari',
-          review: '从认知革命到科技革命，重新审视人类历史的宏大叙事。改变了我对历史和未来的认知。',
-          reviewEn: 'From cognitive revolution to technological revolution, a grand narrative reexamining human history. Changed my understanding of history and future.',
-          rating: '9.5/10',
-        },
-        {
-          title: '思考，快与慢',
-          titleEn: 'Thinking, Fast and Slow',
-          author: 'Daniel Kahneman',
-          review: '诺贝尔经济学奖得主卡尼曼的经典之作。深入理解人类决策的两个系统，避免认知偏差。',
-          reviewEn: 'Nobel laureate Kahneman\'s classic. Deep understanding of the two systems of human decision-making, avoiding cognitive biases.',
-          rating: '9/10',
-        },
-        {
-          title: '未来简史',
-          titleEn: 'Homo Deus',
-          author: 'Yuval Noah Harari',
-          review: '当AI和生物技术改变人类，我们将走向何方？对未来的深刻洞见。',
-          reviewEn: 'Where will we go when AI and biotechnology transform humanity? Profound insights into the future.',
-          rating: '9/10',
-        },
-      ],
+      title: '查拉图斯特拉如是说',
+      titleEn: 'Thus Spoke Zarathustra',
+      author: '弗里德里希·尼采',
+      authorEn: 'Friedrich Nietzsche',
+      cover: 'https://img2.doubanio.com/view/subject/l/public/s4371408.jpg',
+      review: '尼采的超人哲学和永恒轮回深深震撼了我。教会我创造自己的价值观，成为命运的主人。',
+      reviewEn: 'Nietzsche\'s Übermensch philosophy and eternal recurrence deeply shocked me. Taught me to create my own values and become master of my destiny.',
+      category: '哲学',
+      categoryEn: 'Philosophy',
+    },
+    {
+      title: '尼采诗集',
+      titleEn: 'Nietzsche Poetry',
+      author: '弗里德里希·尼采',
+      authorEn: 'Friedrich Nietzsche',
+      cover: 'https://img2.doubanio.com/view/subject/l/public/s33945589.jpg',
+      review: '尼采的诗歌展现了他对生命、孤独和超越的深刻思考，让我看到哲学的另一面。',
+      reviewEn: 'Nietzsche\'s poetry reveals his profound thoughts on life, solitude, and transcendence, showing me another side of philosophy.',
+      category: '哲学',
+      categoryEn: 'Philosophy',
+    },
+    {
+      title: '昨日的世界',
+      titleEn: 'The World of Yesterday',
+      author: '斯蒂芬·茨威格',
+      authorEn: 'Stefan Zweig',
+      cover: 'https://img1.doubanio.com/view/subject/l/public/s27374671.jpg',
+      review: '茨威格对一战前欧洲黄金时代的回忆，让我深刻理解和平与文明的珍贵。',
+      reviewEn: 'Zweig\'s memories of Europe\'s golden age before WWI made me deeply understand the preciousness of peace and civilization.',
+      category: '历史',
+      categoryEn: 'History',
+    },
+    {
+      title: '在轮下',
+      titleEn: 'Beneath the Wheel',
+      author: '赫尔曼·黑塞',
+      authorEn: 'Hermann Hesse',
+      cover: 'https://img2.doubanio.com/view/subject/l/public/s34143779.jpg',
+      review: '黑塞描写的教育压迫让我反思现代教育。不要为了迎合他人期待而失去自我。',
+      reviewEn: 'Hesse\'s depiction of educational oppression made me reflect on modern education. Don\'t lose yourself to meet others\' expectations.',
+      category: '小说',
+      categoryEn: 'Novel',
+    },
+    {
+      title: '美国宪政历程',
+      titleEn: '25 Landmark Cases',
+      author: '任东来等',
+      authorEn: 'Ren Donglai',
+      cover: 'https://img2.doubanio.com/view/subject/l/public/s1151274.jpg',
+      review: '通过25个司法案例深入理解美国宪政精神，法治如何塑造现代社会。',
+      reviewEn: 'Understanding American constitutional spirit through 25 judicial cases, how rule of law shapes modern society.',
+      category: '法律',
+      categoryEn: 'Law',
     },
   ];
 
@@ -148,11 +117,11 @@ export default function ReadingSection() {
 
   return (
     <section id="reading" className="py-24 dark-section">
-      <div className="max-w-6xl mx-auto px-6 space-y-20 relative z-10">
+      <div className="max-w-6xl mx-auto px-6 space-y-16 relative z-10">
         {/* Section Title */}
-        <div className="text-center">
+        <div className="text-center animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            {language === 'zh' ? '阅读书单' : 'Reading List'}
+            {language === 'zh' ? '📚 我读过的书' : '📚 Books I\'ve Read'}
           </h2>
           <p className="text-gray-100 max-w-2xl mx-auto leading-relaxed">
             {language === 'zh'
@@ -162,48 +131,57 @@ export default function ReadingSection() {
         </div>
 
         {/* Reading Quote */}
-        <div className="glass-card rounded-xl p-6 border-l-4 border-green-500/50">
+        <div className="glass-card rounded-xl p-6 border-l-4 border-green-500/50 animate-fade-in" style={{ animationDelay: '100ms' }}>
           <blockquote className="text-lg md:text-xl text-gray-50 italic text-center leading-relaxed">
             {language === 'zh'
-              ? '"读书不是为了雄辩和驳斥，也不是为了轻信和盲从，而是为了思考和权衡"'
-              : '"Reading is not for eloquence and refutation, nor for credulity and blind obedience, but for thinking and weighing"'}
+              ? '"在我的一生中，我所认识的聪明人没有不每天阅读的——一个都没有"'
+              : '"In my whole life, I have known no wise people who didn\'t read all the time — none, zero"'}
           </blockquote>
-          <p className="text-sm text-gray-400 mt-3 text-center">— Francis Bacon</p>
+          <p className="text-sm text-gray-400 mt-3 text-center">— Charlie Munger</p>
         </div>
 
-        {/* Books by Category */}
-        {bookCategories.map((category, catIndex) => (
-          <div key={catIndex}>
-            <h3 className="text-2xl font-bold text-white mb-6">
-              {language === 'zh' ? category.category : category.categoryEn}
-            </h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {category.books.map((book, bookIndex) => (
-                <div
-                  key={bookIndex}
-                  className="glass-card rounded-xl p-6 animate-fade-in transition-all duration-500"
-                  style={{ animationDelay: `${bookIndex * 80}ms` }}
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
-                      <h4 className="text-lg font-bold text-white mb-1">
-                        {language === 'zh' ? book.title : book.titleEn}
-                      </h4>
-                      <p className="text-sm text-gray-500 mb-2">{book.author}</p>
-                    </div>
-                    <div className="flex-shrink-0 w-12 h-16 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded flex items-center justify-center text-2xl ring-2 ring-green-500/30">
-                      📖
-                    </div>
-                  </div>
-
-                  <p className="text-sm text-gray-50 leading-relaxed">
+        {/* Books Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {books.map((book, index) => (
+            <div
+              key={index}
+              className="group animate-fade-in"
+              style={{ animationDelay: `${index * 60}ms` }}
+            >
+              {/* Book Cover - Hover Effect */}
+              <div className="relative overflow-hidden rounded-lg shadow-lg mb-3 aspect-[2/3] bg-slate-800 transition-all duration-300 group-hover:shadow-2xl group-hover:scale-105 group-hover:-translate-y-2">
+                <Image
+                  src={book.cover}
+                  alt={language === 'zh' ? book.title : book.titleEn}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                {/* Overlay on Hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                  <p className="text-xs text-gray-200 leading-relaxed line-clamp-4">
                     {language === 'zh' ? book.review : book.reviewEn}
                   </p>
                 </div>
-              ))}
+                {/* Category Badge */}
+                <div className="absolute top-2 right-2">
+                  <span className="inline-block px-2 py-1 bg-black/60 backdrop-blur-sm text-white text-xs rounded border border-white/20">
+                    {language === 'zh' ? book.category : book.categoryEn}
+                  </span>
+                </div>
+              </div>
+              
+              {/* Book Info */}
+              <div className="px-1">
+                <h4 className="text-sm font-bold text-white mb-1 line-clamp-2 group-hover:text-orange-400 transition-colors">
+                  {language === 'zh' ? book.title : book.titleEn}
+                </h4>
+                <p className="text-xs text-gray-400">
+                  {language === 'zh' ? book.author : book.authorEn}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
 
         {/* Reading Goals */}
         <div>

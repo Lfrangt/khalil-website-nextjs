@@ -156,29 +156,29 @@ export default function InfluencersSection() {
           {influencers.map((person, index) => (
             <div
               key={index}
-              className="glass-card influencer-card rounded-xl p-6 animate-fade-in"
+              className="group glass-card rounded-xl p-6 animate-fade-in transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:-translate-y-1"
               style={{ animationDelay: `${index * 80}ms` }}
             >
               <div className="flex gap-4 mb-4">
                 {/* Avatar */}
-                <div className="flex-shrink-0 w-20 h-20 rounded-full overflow-hidden ring-2 ring-orange-500/30 bg-slate-800 avatar-ring image-zoom">
+                <div className="flex-shrink-0 w-20 h-20 rounded-full overflow-hidden ring-2 ring-orange-500/30 bg-slate-800 transition-all duration-300 group-hover:ring-4 group-hover:ring-orange-500/50 group-hover:scale-110">
                   <Image
                     src={person.image}
                     alt={language === 'zh' ? person.nameZh : person.name}
                     width={80}
                     height={80}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                 </div>
                 
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-white mb-1">
+                  <h3 className="text-xl font-bold text-white mb-1 transition-colors duration-300 group-hover:text-orange-400">
                     {language === 'zh' ? person.nameZh : person.name}
                   </h3>
                   <p className="text-sm text-gray-400 mb-2">
                     {language === 'zh' ? person.title : person.titleEn}
                   </p>
-                  <span className="inline-block px-3 py-1 bg-white/10 text-gray-100 text-xs rounded-full border border-white/20">
+                  <span className="inline-block px-3 py-1 bg-white/10 text-gray-100 text-xs rounded-full border border-white/20 transition-all duration-300 group-hover:bg-orange-500/20 group-hover:border-orange-500/40">
                     📚 {language === 'zh' ? person.book : person.bookEn}
                   </span>
                 </div>
@@ -190,7 +190,7 @@ export default function InfluencersSection() {
               </p>
 
               {/* Quote */}
-              <div className="bg-white/5 p-4 rounded-lg border-l-4 border-orange-500/50 mb-4">
+              <div className="bg-white/5 p-4 rounded-lg border-l-4 border-orange-500/50 mb-4 transition-all duration-300 group-hover:bg-white/10 group-hover:border-orange-500">
                 <p className="text-xs text-gray-100 italic leading-relaxed">
                   {person.quote}
                 </p>
@@ -201,7 +201,7 @@ export default function InfluencersSection() {
                 {(language === 'zh' ? person.tags : person.tagsEn).map((tag, idx) => (
                   <span
                     key={idx}
-                    className="inline-block px-3 py-1 bg-white/5 text-gray-400 text-xs rounded border border-white/10 tag-item cursor-pointer"
+                    className="inline-block px-3 py-1 bg-white/5 text-gray-400 text-xs rounded border border-white/10 transition-all duration-200 hover:bg-orange-500/20 hover:text-orange-300 hover:border-orange-500/40 cursor-pointer"
                   >
                     {tag}
                   </span>
