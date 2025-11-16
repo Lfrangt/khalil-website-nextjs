@@ -42,7 +42,7 @@ export default function NomadMap() {
 
   // Animate avatar along flight path
   const animateFlightPath = () => {
-    if (!map.current || flightPathRef.current.length === 0) return;
+    if (!map.current || !marker.current || flightPathRef.current.length === 0) return;
 
     const totalDuration = 8000; // 8 seconds for complete flight
     const startTime = Date.now();
@@ -60,19 +60,18 @@ export default function NomadMap() {
       const pathIndex = Math.floor(easedProgress * (flightPathRef.current.length - 1));
       const currentPos = flightPathRef.current[pathIndex];
 
-      // Update avatar position
-      setCurrentLocation(currentPos);
+      // Update avatar position and camera synchronously
+      if (marker.current && map.current) {
+        // Directly update marker position (no state delay)
+        marker.current.setLngLat(currentPos);
 
-      // Update camera to follow avatar with smooth zoom
-      if (map.current) {
         // Zoom in gradually as we approach destination
         const zoomLevel = 2.5 + (progress * 10.5); // From 2.5 to 13
 
-        map.current.easeTo({
+        // Jump to position immediately for perfect sync
+        map.current.jumpTo({
           center: currentPos,
-          zoom: zoomLevel,
-          duration: 100, // Smooth transition
-          essential: true
+          zoom: zoomLevel
         });
       }
 
@@ -81,6 +80,7 @@ export default function NomadMap() {
         animationRef.current = requestAnimationFrame(animate);
       } else {
         setIsSharing(true);
+        setCurrentLocation(vancouver); // Update state at the end
       }
     };
 
@@ -227,13 +227,8 @@ export default function NomadMap() {
           .setPopup(new mapboxgl.Popup({ offset: 25 }).setText(language === 'zh' ? '温哥华（终点）' : 'Vancouver (Destination)'))
           .addTo(mapInstance);
 
-        // Start avatar at Wenzhou and begin flight animation
+        // Initialize avatar at Wenzhou
         setCurrentLocation(wenzhou);
-
-        // Wait a bit for map to settle, then start animation
-        setTimeout(() => {
-          animateFlightPath();
-        }, 1000);
       });
 
       mapInstance.on('error', (e) => {
@@ -304,6 +299,8 @@ export default function NomadMap() {
       avatar.style.objectFit = 'cover';
       avatar.style.border = '3px solid white';
       avatar.style.display = 'block';
+      avatar.style.transform = 'rotate(0deg)'; // Ensure no rotation
+      avatar.style.imageOrientation = 'from-image'; // Respect EXIF orientation
 
       avatarContainer.appendChild(avatar);
       el.appendChild(avatarContainer);
@@ -327,16 +324,30 @@ export default function NomadMap() {
       el.appendChild(label);
 
       // Add marker to map
-      const newMarker = new mapboxgl.Marker({ element: el })
+      const newMarker = new mapboxgl.Marker({
+        element: el,
+        anchor: 'center', // Center the marker on its coordinates
+        rotationAlignment: 'map', // Keep marker upright relative to map
+        pitchAlignment: 'map' // Keep marker flat on map
+      })
         .setLngLat(currentLocation)
         .addTo(map.current);
 
       marker.current = newMarker;
       console.log('Marker created successfully');
+
+      // Start flight animation if this is the initial marker at Wenzhou
+      const isAtWenzhou = currentLocation[0] === wenzhou[0] && currentLocation[1] === wenzhou[1];
+      if (isAtWenzhou && flightPathRef.current.length > 0 && !isSharing) {
+        // Wait a bit for marker to render, then start animation
+        setTimeout(() => {
+          animateFlightPath();
+        }, 500);
+      }
     } catch (error) {
       console.error('Error creating marker:', error);
     }
-  }, [currentLocation, language, mapLoaded]);
+  }, [currentLocation, language, mapLoaded, isSharing]);
 
   return (
     <div className="relative w-full h-full">
