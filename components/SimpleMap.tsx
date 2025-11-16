@@ -14,8 +14,10 @@ export default function SimpleMap() {
   const map = useRef<mapboxgl.Map | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
 
-  // Journey: From Wenzhou (hometown) to Vancouver (current home)
+  // Journey: From Wenzhou (hometown) to Vancouver (current home) - Eastward across Pacific
   const wenzhouLocation: [number, number] = [120.6994, 28.0006]; // Wenzhou, China
+  const midPacific1: [number, number] = [160, 35]; // First waypoint (moving east)
+  const midPacific2: [number, number] = [-160, 42]; // Second waypoint (across dateline)
   const vancouverLocation: [number, number] = [-123.1207, 49.2827]; // Vancouver, Canada
 
   useEffect(() => {
@@ -96,61 +98,88 @@ export default function SimpleMap() {
           .setLngLat(wenzhouLocation)
           .addTo(mapInstance);
 
-        // Smooth journey animation with optimized performance
+        // Smooth and elegant journey animation
         const startJourney = () => {
-          const duration = 3000; // 3 seconds for smooth performance
+          const duration = 4500; // 4.5 seconds for smooth, elegant animation
           const startTime = performance.now();
           
-          // Also fly the camera
+          // Smooth camera flight eastward across the Pacific
           mapInstance.flyTo({
             center: vancouverLocation,
             zoom: 10,
             duration: duration,
             essential: true,
-            curve: 1.3,
-            speed: 0.9,
-            easing: (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
+            curve: 1.5, // Gentler curve for smoother movement
+            speed: 0.7, // Slower, more elegant speed
+            bearing: 0,
+            pitch: 0,
+            easing: (t) => {
+              // Cubic ease-in-out for ultra-smooth motion
+              return t < 0.5
+                ? 4 * t * t * t
+                : 1 - Math.pow(-2 * t + 2, 3) / 2;
+            }
           });
 
-          // Animate marker along the path
+          // Animate marker along the path (eastward across Pacific)
           const animate = (currentTime: number) => {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
             
-            // Smooth easing
+            // Ultra-smooth cubic ease-in-out
             const eased = progress < 0.5
-              ? 2 * progress * progress
-              : -1 + (4 - 2 * progress) * progress;
+              ? 4 * progress * progress * progress
+              : 1 - Math.pow(-2 * progress + 2, 3) / 2;
             
-            // Calculate position
-            const lng = wenzhouLocation[0] + (vancouverLocation[0] - wenzhouLocation[0]) * eased;
-            const lat = wenzhouLocation[1] + (vancouverLocation[1] - wenzhouLocation[1]) * eased;
+            // Bezier curve through waypoints for natural flight path
+            // Use cubic Bezier interpolation for smooth curves
+            let lng, lat;
+            
+            // Create smooth Bezier curve through all points
+            const p0 = wenzhouLocation;
+            const p1 = midPacific1;
+            const p2 = midPacific2;
+            const p3 = vancouverLocation;
+            
+            // Cubic Bezier formula: B(t) = (1-t)³P0 + 3(1-t)²tP1 + 3(1-t)t²P2 + t³P3
+            const t = eased;
+            const t2 = t * t;
+            const t3 = t2 * t;
+            const mt = 1 - t;
+            const mt2 = mt * mt;
+            const mt3 = mt2 * mt;
+            
+            lng = mt3 * p0[0] + 3 * mt2 * t * p1[0] + 3 * mt * t2 * p2[0] + t3 * p3[0];
+            lat = mt3 * p0[1] + 3 * mt2 * t * p1[1] + 3 * mt * t2 * p2[1] + t3 * p3[1];
             
             // Update marker position
             marker.setLngLat([lng, lat]);
             
-            // Add dynamic rotation based on direction
-            const rotation = eased * 360;
-            markerEl.style.transform = `translateZ(0) rotate(${rotation % 360}deg)`;
+            // Smooth subtle rotation and scale effects
+            const scale = 1 + Math.sin(progress * Math.PI) * 0.1; // Subtle pulsing
+            const rotation = progress * 180; // Half rotation for elegance
+            markerEl.style.transform = `translateZ(0) scale(${scale}) rotate(${rotation}deg)`;
+            markerEl.style.transition = 'none'; // Disable CSS transition for smooth RAF animation
             
             if (progress < 1) {
               requestAnimationFrame(animate);
             } else {
-              // Arrival animation
-              markerEl.style.transform = 'translateZ(0) scale(1.2)';
+              // Elegant arrival animation
+              markerEl.style.transition = 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+              markerEl.style.transform = 'translateZ(0) scale(1.15) rotate(180deg)';
               markerEl.style.boxShadow = `
-                0 0 0 8px rgba(255, 107, 0, 0.4),
-                0 0 40px rgba(255, 107, 0, 0.8),
-                0 15px 40px rgba(0, 0, 0, 0.4)
+                0 0 0 8px rgba(255, 107, 0, 0.5),
+                0 0 50px rgba(255, 107, 0, 0.9),
+                0 20px 50px rgba(0, 0, 0, 0.5)
               `;
               setTimeout(() => {
-                markerEl.style.transform = 'translateZ(0) scale(1)';
+                markerEl.style.transform = 'translateZ(0) scale(1) rotate(180deg)';
                 markerEl.style.boxShadow = `
                   0 0 0 4px rgba(255, 107, 0, 0.3),
                   0 0 20px rgba(255, 107, 0, 0.6),
                   0 10px 30px rgba(0, 0, 0, 0.3)
                 `;
-              }, 300);
+              }, 600);
             }
           };
           

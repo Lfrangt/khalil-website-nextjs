@@ -18,6 +18,8 @@ export default function NomadMap() {
   const [currentLocation, setCurrentLocation] = useState<[number, number] | null>(null);
   const [locationError, setLocationError] = useState<string | null>(null);
   const [isSharing, setIsSharing] = useState(false);
+  const animationRef = useRef<number | null>(null);
+  const flightPathRef = useRef<[number, number][]>([]);
 
   // Flight path coordinates
   const wenzhou: [number, number] = [120.6986, 28.0006]; // Wenzhou, China
@@ -38,17 +40,77 @@ export default function NomadMap() {
     return points;
   };
 
-  // Recenter map to Khalil's location (no privacy invasion!)
-  const recenterToKhalil = () => {
-    const khalilLocation: [number, number] = [-123.1207, 49.2827]; // Vancouver
+  // Animate avatar along flight path
+  const animateFlightPath = () => {
+    if (!map.current || flightPathRef.current.length === 0) return;
 
-        if (map.current) {
-          map.current.flyTo({
-        center: khalilLocation,
-            zoom: 13,
-            duration: 1500,
-          });
-        }
+    const totalDuration = 8000; // 8 seconds for complete flight
+    const startTime = Date.now();
+
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / totalDuration, 1);
+
+      // Ease in-out function for smooth acceleration/deceleration
+      const easeInOutCubic = (t: number) => {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      };
+
+      const easedProgress = easeInOutCubic(progress);
+      const pathIndex = Math.floor(easedProgress * (flightPathRef.current.length - 1));
+      const currentPos = flightPathRef.current[pathIndex];
+
+      // Update avatar position
+      setCurrentLocation(currentPos);
+
+      // Update camera to follow avatar with smooth zoom
+      if (map.current) {
+        // Zoom in gradually as we approach destination
+        const zoomLevel = 2.5 + (progress * 10.5); // From 2.5 to 13
+
+        map.current.easeTo({
+          center: currentPos,
+          zoom: zoomLevel,
+          duration: 100, // Smooth transition
+          essential: true
+        });
+      }
+
+      // Continue animation until complete
+      if (progress < 1) {
+        animationRef.current = requestAnimationFrame(animate);
+      } else {
+        setIsSharing(true);
+      }
+    };
+
+    animate();
+  };
+
+  // Replay flight animation
+  const recenterToKhalil = () => {
+    // Cancel existing animation
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+    }
+
+    // Reset to start position
+    setCurrentLocation(wenzhou);
+    setIsSharing(false);
+
+    // Fly map back to overview
+    if (map.current) {
+      map.current.flyTo({
+        center: [-30, 45],
+        zoom: 2.5,
+        duration: 1500,
+      });
+
+      // Start animation after camera settles
+      setTimeout(() => {
+        animateFlightPath();
+      }, 1600);
+    }
   };
 
   useEffect(() => {
@@ -86,6 +148,7 @@ export default function NomadMap() {
 
         // Generate flight path from Wenzhou to Vancouver
         const flightPath = generateArc(wenzhou, vancouver);
+        flightPathRef.current = flightPath;
 
         // Add flight path as a line
         mapInstance.addSource('flight-route', {
@@ -149,10 +212,28 @@ export default function NomadMap() {
           .setPopup(new mapboxgl.Popup({ offset: 25 }).setText(language === 'zh' ? '温州（起点）' : 'Wenzhou (Start)'))
           .addTo(mapInstance);
 
-        // Set Khalil's location (Vancouver) by default - no privacy invasion!
-        const khalilLocation: [number, number] = [-123.1207, 49.2827]; // Vancouver
-        setCurrentLocation(khalilLocation);
-        setIsSharing(true);
+        // Vancouver destination marker
+        const vancouverEl = document.createElement('div');
+        vancouverEl.className = 'flight-marker';
+        vancouverEl.style.width = '12px';
+        vancouverEl.style.height = '12px';
+        vancouverEl.style.borderRadius = '50%';
+        vancouverEl.style.backgroundColor = '#10b981';
+        vancouverEl.style.border = '2px solid white';
+        vancouverEl.style.boxShadow = '0 0 10px rgba(16, 185, 129, 0.8)';
+
+        new mapboxgl.Marker({ element: vancouverEl })
+          .setLngLat(vancouver)
+          .setPopup(new mapboxgl.Popup({ offset: 25 }).setText(language === 'zh' ? '温哥华（终点）' : 'Vancouver (Destination)'))
+          .addTo(mapInstance);
+
+        // Start avatar at Wenzhou and begin flight animation
+        setCurrentLocation(wenzhou);
+
+        // Wait a bit for map to settle, then start animation
+        setTimeout(() => {
+          animateFlightPath();
+        }, 1000);
       });
 
       mapInstance.on('error', (e) => {
@@ -165,6 +246,9 @@ export default function NomadMap() {
       // Cleanup
       return () => {
         clearTimeout(timeout);
+        if (animationRef.current) {
+          cancelAnimationFrame(animationRef.current);
+        }
         if (marker.current) {
           marker.current.remove();
         }
@@ -267,14 +351,14 @@ export default function NomadMap() {
         </div>
       )}
 
-      {/* Right top - Recenter to Khalil's location button */}
+      {/* Right top - Replay flight animation button */}
       <button
         onClick={recenterToKhalil}
         className="absolute top-4 right-4 z-20 bg-white/95 backdrop-blur-md p-3 rounded-full shadow-lg hover:bg-white transition-all hover:scale-110"
-        title={language === 'zh' ? '回到我的位置' : 'Back to My Location'}
+        title={language === 'zh' ? '重播飞行动画' : 'Replay Flight Animation'}
       >
           <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
           </svg>
       </button>
 
