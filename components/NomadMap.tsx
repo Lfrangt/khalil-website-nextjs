@@ -299,8 +299,7 @@ export default function NomadMap() {
       avatar.style.objectFit = 'cover';
       avatar.style.border = '3px solid white';
       avatar.style.display = 'block';
-      avatar.style.transform = 'rotate(0deg)'; // Ensure no rotation
-      avatar.style.imageOrientation = 'from-image'; // Respect EXIF orientation
+      avatar.style.transform = 'rotate(180deg)'; // Fix upside-down image
 
       avatarContainer.appendChild(avatar);
       el.appendChild(avatarContainer);
