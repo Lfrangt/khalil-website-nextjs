@@ -66,7 +66,8 @@ export default function NomadMap() {
         marker.current.setLngLat(currentPos);
 
         // Zoom in gradually as we approach destination
-        const zoomLevel = 2.5 + (progress * 10.5); // From 2.5 to 13
+        // In globe mode: 1.5 (space view) to 12 (street level)
+        const zoomLevel = 1.5 + (progress * 10.5); // From 1.5 to 12
 
         // Jump to position immediately for perfect sync
         map.current.jumpTo({
@@ -98,11 +99,11 @@ export default function NomadMap() {
     setCurrentLocation(wenzhou);
     setIsSharing(false);
 
-    // Fly map back to overview
+    // Fly map back to globe overview
     if (map.current) {
       map.current.flyTo({
         center: [-30, 45],
-        zoom: 2.5,
+        zoom: 1.5, // Space view for globe mode
         duration: 1500,
       });
 
@@ -126,15 +127,16 @@ export default function NomadMap() {
     }, 10000); // 10 second timeout
 
     try {
-      // Initialize map with dark theme like Instagram/WeChat
-      // Center map to show both Wenzhou and Vancouver
+      // Initialize map with 3D globe view
       const mapInstance = new mapboxgl.Map({
         container: mapContainer.current,
         style: 'mapbox://styles/mapbox/dark-v11',
+        projection: 'globe', // Enable 3D globe view
         center: [-30, 45], // Center between Wenzhou and Vancouver
-        zoom: 2.5, // Zoom out to show full Pacific flight path
-        dragRotate: false,
-        touchZoomRotate: false,
+        zoom: 1.5, // Start from space view
+        pitch: 0,
+        dragRotate: true, // Allow rotation for globe
+        touchZoomRotate: true,
         attributionControl: false,
         logoPosition: 'bottom-left',
       });
@@ -145,6 +147,15 @@ export default function NomadMap() {
         console.log('Map loaded successfully');
         clearTimeout(timeout);
         setMapLoaded(true);
+
+        // Configure globe atmosphere and styling
+        mapInstance.setFog({
+          color: 'rgb(186, 210, 235)', // Light blue atmosphere
+          'high-color': 'rgb(36, 92, 223)', // Deeper blue at horizon
+          'horizon-blend': 0.02,
+          'space-color': 'rgb(11, 11, 25)', // Dark space color
+          'star-intensity': 0.6
+        });
 
         // Generate flight path from Wenzhou to Vancouver
         const flightPath = generateArc(wenzhou, vancouver);
@@ -299,7 +310,7 @@ export default function NomadMap() {
       avatar.style.objectFit = 'cover';
       avatar.style.border = '3px solid white';
       avatar.style.display = 'block';
-      avatar.style.transform = 'rotate(180deg)'; // Fix upside-down image
+      avatar.style.transform = 'scaleY(-1)'; // Flip vertically to fix upside-down image
 
       avatarContainer.appendChild(avatar);
       el.appendChild(avatarContainer);
