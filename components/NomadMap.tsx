@@ -310,7 +310,6 @@ export default function NomadMap() {
       avatar.style.objectFit = 'cover';
       avatar.style.border = '3px solid white';
       avatar.style.display = 'block';
-      avatar.style.transform = 'scaleY(-1)'; // Flip vertically to fix upside-down image
 
       avatarContainer.appendChild(avatar);
       el.appendChild(avatarContainer);
