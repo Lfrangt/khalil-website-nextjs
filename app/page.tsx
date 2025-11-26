@@ -18,9 +18,9 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <MapSection />
       <InterestsPreview />
       <InfluencersPreview />
+      <MapSection />
       <ContactSection />
     </>
   );

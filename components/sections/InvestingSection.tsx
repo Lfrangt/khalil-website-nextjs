@@ -47,6 +47,7 @@ export default function InvestingSection() {
       descriptionEn: 'Leader in clean energy and electric vehicles',
       thesis: 'Tesla不仅是电动车公司，更是能源和AI公司。其在自动驾驶、电池技术和能源存储领域的领先地位，将在未来几十年持续创造价值。看好Elon Musk的执行力和Tesla的长期愿景。',
       thesisEn: 'Tesla is not just an EV company, but an energy and AI company. Its leadership in autonomous driving, battery technology, and energy storage will create value for decades. Bullish on Elon Musk\'s execution and Tesla\'s long-term vision.',
+      logo: '/images/logos/tesla.png',
     },
     {
       name: 'NVIDIA',
@@ -57,6 +58,7 @@ export default function InvestingSection() {
       descriptionEn: 'Leading company in AI chips',
       thesis: 'NVIDIA在AI算力基础设施领域拥有绝对优势。随着AI技术的快速发展，对高性能GPU的需求将持续增长。CUDA生态系统的护城河和在数据中心、自动驾驶等领域的布局，使其成为AI时代的核心受益者。',
       thesisEn: 'NVIDIA has absolute dominance in AI computing infrastructure. With rapid AI development, demand for high-performance GPUs will continue growing. CUDA ecosystem moat and positioning in data centers and autonomous driving make it a core AI beneficiary.',
+      logo: '/images/logos/nvidia.png',
     },
     {
       name: 'Apple',
@@ -67,6 +69,7 @@ export default function InvestingSection() {
       descriptionEn: 'Consumer technology giant',
       thesis: '苹果拥有卓越的品牌价值和生态系统优势。硬件、软件、服务的完美结合形成强大的经济护城河。看好其在可穿戴设备、AR/VR和服务领域的长期增长潜力。',
       thesisEn: 'Apple has excellent brand value and ecosystem advantages. The perfect combination of hardware, software, and services creates a strong economic moat. Bullish on its long-term growth potential in wearables, AR/VR, and services.',
+      logo: '/images/logos/apple.svg',
     },
     {
       name: '小米集团',
@@ -77,6 +80,7 @@ export default function InvestingSection() {
       descriptionEn: '"Smartphone + AIoT" strategic layout',
       thesis: '小米在智能手机和AIoT（人工智能物联网）领域布局完善。其"手机×AIoT"双引擎战略，通过高性价比产品占领市场，构建了完整的智能生态系统。看好其在智能汽车和国际化扩张方面的潜力。',
       thesisEn: 'Xiaomi has a comprehensive layout in smartphones and AIoT (Artificial Intelligence of Things). Its "Smartphone × AIoT" dual-engine strategy occupies the market with cost-effective products and builds a complete smart ecosystem. Bullish on its potential in smart vehicles and international expansion.',
+      logo: '/images/logos/xiaomi.png',
     },
     {
       name: 'Bitcoin',
@@ -87,6 +91,7 @@ export default function InvestingSection() {
       descriptionEn: 'Digital gold, decentralized store of value',
       thesis: 'Bitcoin作为第一个成功的去中心化货币，其稀缺性（2100万枚上限）和去中心化特性使其成为对抗通胀的数字黄金。随着机构采用增加和全球货币政策不确定性，BTC的长期价值存储属性将更加凸显。',
       thesisEn: 'As the first successful decentralized currency, Bitcoin\'s scarcity (21M cap) and decentralization make it digital gold against inflation. With increasing institutional adoption and global monetary policy uncertainty, BTC\'s long-term value storage will become more prominent.',
+      logo: '/images/logos/bitcoin.png',
     },
     {
       name: 'Cardano',
@@ -97,6 +102,7 @@ export default function InvestingSection() {
       descriptionEn: 'Next-generation blockchain platform',
       thesis: 'Cardano采用学术研究驱动的开发方式，其eUTxO模型和分层架构设计更加安全和可扩展。随着DeFi和智能合约生态的发展，Cardano有潜力成为下一代区块链基础设施。我也是Cardano开发者，深度了解其技术优势。',
       thesisEn: 'Cardano takes an academic research-driven approach. Its eUTxO model and layered architecture are more secure and scalable. As DeFi and smart contract ecosystem develops, Cardano has potential to be next-gen blockchain infrastructure. As a Cardano developer, I deeply understand its technical advantages.',
+      logo: '/images/logos/cardano.png',
     },
   ];
 
@@ -295,8 +301,18 @@ export default function InvestingSection() {
                     </h4>
                     <p className="text-sm text-gray-100">{holding.name}</p>
                   </div>
-                  <div className="w-12 h-12 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg flex items-center justify-center">
-                    <span className="text-xl">{holding.category.includes('股') || holding.categoryEn === 'US Stocks' ? '📊' : '₿'}</span>
+                  <div className="w-16 h-16 bg-white rounded-lg flex items-center justify-center overflow-hidden">
+                    {/* @ts-ignore */}
+                    {holding.logo ? (
+                      <img
+                        // @ts-ignore
+                        src={holding.logo}
+                        alt={holding.name}
+                        className="w-full h-full object-contain"
+                      />
+                    ) : (
+                      <span className="text-xl">{holding.category.includes('股') || holding.categoryEn === 'US Stocks' ? '📊' : '₿'}</span>
+                    )}
                   </div>
                 </div>
                 <p className="text-sm text-gray-50 leading-relaxed mb-3">

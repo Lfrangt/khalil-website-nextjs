@@ -27,14 +27,16 @@ export default function SimpleMap() {
       // Initialize map starting from Wenzhou (hometown)
       const mapInstance = new mapboxgl.Map({
         container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/outdoors-v12',
+        style: 'mapbox://styles/mapbox/standard', // New Standard style (Apple Maps like)
+        projection: { name: 'globe' }, 
         center: wenzhouLocation,
-        zoom: 10,
+        zoom: 2,
+        pitch: 0,
+        bearing: 0,
         dragRotate: false,
         touchZoomRotate: false,
         attributionControl: false,
         logoPosition: 'bottom-right',
-        // Performance optimizations
         antialias: true,
       });
 
@@ -48,6 +50,27 @@ export default function SimpleMap() {
         }),
         'top-right'
       );
+
+      // Apple/qzq.at style atmosphere (Bright & Clean)
+      mapInstance.on('style.load', () => {
+        mapInstance.setFog({
+          'color': 'rgb(255, 255, 255)', // White atmosphere
+          'high-color': 'rgb(200, 215, 255)', // Light blue sky
+          'horizon-blend': 0.05,
+          'space-color': 'rgb(245, 247, 250)', // Very light gray background (not black)
+          'star-intensity': 0 // No stars, clean look
+        });
+        
+        // Adjust lighting to be softer
+        if (mapInstance.getStyle().layers) {
+           // Standard style configuration
+           mapInstance.setConfig('basemap', {
+             'lightPreset': 'day', // Force day mode
+             'showPointOfInterestLabels': false, // Cleaner look
+             'showTransitLabels': false,
+           });
+        }
+      });
 
       mapInstance.on('load', () => {
         setMapLoaded(true);
@@ -75,18 +98,36 @@ export default function SimpleMap() {
           background-size: cover;
           background-position: center;
           border-radius: 50%;
-          border: 4px solid #ff6b00;
+          border: 3px solid rgba(255, 255, 255, 0.8);
           box-shadow: 
             0 0 0 4px rgba(255, 107, 0, 0.3),
-            0 0 20px rgba(255, 107, 0, 0.6),
-            0 10px 30px rgba(0, 0, 0, 0.3);
+            0 0 30px rgba(255, 107, 0, 0.5),
+            0 10px 30px rgba(0, 0, 0, 0.5);
           cursor: pointer;
           will-change: transform;
           transform: translateZ(0);
           backface-visibility: hidden;
-          animation: avatar-pulse 2s ease-in-out infinite;
           z-index: 10;
+          transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         `;
+        
+        // Add glowing trail effect (Subtle Orange)
+        const trailEl = document.createElement('div');
+        trailEl.style.cssText = `
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          width: 80px;
+          height: 3px;
+          background: linear-gradient(90deg, rgba(255,107,0,0.6), transparent);
+          transform-origin: left center;
+          transform: translate(-50%, -50%) rotate(180deg);
+          filter: blur(2px);
+          z-index: -1;
+          opacity: 0;
+          transition: opacity 0.5s ease;
+        `;
+        markerEl.appendChild(trailEl);
         
         markerWrapper.appendChild(markerEl);
 
@@ -100,24 +141,25 @@ export default function SimpleMap() {
 
         // Smooth and elegant journey animation
         const startJourney = () => {
-          const duration = 4500; // 4.5 seconds for smooth, elegant animation
+          const duration = 6000; // 6 seconds for majestic globe rotation
           const startTime = performance.now();
+          
+          // Show trail
+          trailEl.style.opacity = '1';
           
           // Smooth camera flight eastward across the Pacific
           mapInstance.flyTo({
             center: vancouverLocation,
-            zoom: 10,
+            zoom: 3.5, // Optimal zoom to see the curve of the earth
             duration: duration,
             essential: true,
-            curve: 1.5, // Gentler curve for smoother movement
-            speed: 0.7, // Slower, more elegant speed
+            speed: 0.5, // Majestic slow speed
+            curve: 1.5,
             bearing: 0,
-            pitch: 0,
+            pitch: 45, // Slight pitch to see the horizon
             easing: (t) => {
-              // Cubic ease-in-out for ultra-smooth motion
-              return t < 0.5
-                ? 4 * t * t * t
-                : 1 - Math.pow(-2 * t + 2, 3) / 2;
+              // Custom cubic-bezier(0.45, 0, 0.55, 1) approximation
+              return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
             }
           });
 
