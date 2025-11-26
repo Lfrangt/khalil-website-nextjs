@@ -223,128 +223,137 @@ export default function ReadingSection() {
       goal: '每月至少读完2本书',
       goalEn: 'Read at least 2 books per month',
       progress: 75,
+      icon: '📖'
     },
     {
       goal: '技术类与人文类书籍1:1平衡',
       goalEn: 'Balance tech and humanities books 1:1',
       progress: 80,
+      icon: '⚖️'
     },
     {
       goal: '写读书笔记，内化知识',
       goalEn: 'Write reading notes to internalize knowledge',
       progress: 60,
+      icon: '✍️'
     },
   ];
 
   return (
     <section id="reading" className="py-24 dark-section">
-      <div className="max-w-6xl mx-auto px-6 space-y-20 relative z-10">
-        {/* Hero Section - Apple Style */}
-        <div className="text-center animate-fade-in pt-8 md:pt-16 pb-4">
-          {/* Large Title with Gradient */}
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+      <div className="max-w-7xl mx-auto px-6 space-y-24 relative z-10">
+        {/* Hero Section - Apple Style Typography */}
+        <div className="text-center animate-fade-in pt-12 pb-4">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
+            <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60">
               {language === 'zh' ? '阅读' : 'Reading'}
             </span>
           </h1>
           
-          {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 font-light max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-gray-400 mb-8 font-normal max-w-3xl mx-auto leading-relaxed text-balance">
             {language === 'zh'
-              ? '与伟大的思想对话'
-              : 'In dialogue with great minds'}
-          </p>
-          
-          {/* Description */}
-          <p className="text-base md:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            {language === 'zh'
-              ? '每本书都是通往新世界的一扇门，在阅读中寻找智慧、思考和成长'
-              : 'Every book is a door to a new world. Finding wisdom, reflection, and growth through reading'}
+              ? '与伟大的思想对话，在字里行间寻找智慧的回响'
+              : 'In dialogue with great minds, finding echoes of wisdom between the lines'}
           </p>
         </div>
 
-        {/* Elegant Quote Card - Apple Style */}
+        {/* Quote Card - Apple Glassmorphism */}
         <div className="max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: '200ms' }}>
-          <div className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-white/5">
-            {/* Quote Mark */}
-            <div className="absolute top-6 left-6 text-6xl text-purple-400/20 font-serif">&ldquo;</div>
+          <div className="apple-glass rounded-3xl p-10 md:p-16 relative overflow-hidden group">
+            <div className="absolute -top-20 -left-20 w-64 h-64 bg-purple-500/20 rounded-full blur-[100px] group-hover:bg-purple-500/30 transition-colors duration-700"></div>
+            <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-blue-500/20 rounded-full blur-[100px] group-hover:bg-blue-500/30 transition-colors duration-700"></div>
             
-            {/* Quote Text */}
-            <blockquote className="text-lg md:text-2xl text-white font-light text-center leading-relaxed relative z-10">
-              {language === 'zh'
-                ? '在我的一生中，我所认识的聪明人没有不每天阅读的——一个都没有'
-                : 'In my whole life, I have known no wise people who didn\'t read all the time — none, zero'}
-            </blockquote>
-            
-            {/* Author */}
-            <p className="text-sm md:text-base text-gray-400 mt-6 text-center font-light">
-              — Charlie Munger
-            </p>
+            <div className="relative z-10 text-center">
+              <span className="text-6xl text-white/10 font-serif block mb-4">&ldquo;</span>
+              <blockquote className="text-xl md:text-3xl text-white font-light leading-relaxed tracking-wide">
+                {language === 'zh'
+                  ? '在我的一生中，我所认识的聪明人没有不每天阅读的——一个都没有'
+                  : 'In my whole life, I have known no wise people who didn\'t read all the time — none, zero'}
+              </blockquote>
+              <div className="mt-8 flex items-center justify-center gap-3">
+                <div className="h-[1px] w-12 bg-white/20"></div>
+                <p className="text-sm font-medium text-white/60 uppercase tracking-widest">Charlie Munger</p>
+                <div className="h-[1px] w-12 bg-white/20"></div>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Books Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {/* Books Grid - qzq.at Style Layout */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-6 gap-y-12">
           {books.map((book, index) => (
             <div
               key={index}
-              className="group animate-fade-in"
-              style={{ animationDelay: `${index * 60}ms` }}
+              className="group animate-fade-in flex flex-col"
+              style={{ animationDelay: `${index * 60 + 300}ms` }}
             >
-              {/* Book Cover - Hover Effect */}
-              <div className="relative overflow-hidden rounded-lg shadow-lg mb-3 aspect-[2/3] bg-slate-800 transition-all duration-300 group-hover:shadow-2xl group-hover:scale-105 group-hover:-translate-y-2">
+              {/* Book Cover - 3D Effect */}
+              <div className="book-cover-3d relative aspect-[2/3] mb-5 overflow-hidden bg-gray-800">
                 <Image
                   src={book.cover}
                   alt={language === 'zh' ? book.title : book.titleEn}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 20vw"
                 />
-                {/* Overlay on Hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                  <p className="text-xs text-gray-200 leading-relaxed line-clamp-4">
+                
+                {/* Glass Overlay on Hover */}
+                <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+                  <p className="text-xs text-white/90 text-center font-light leading-relaxed line-clamp-6">
                     {language === 'zh' ? book.review : book.reviewEn}
                   </p>
                 </div>
-                {/* Category Badge */}
-                <div className="absolute top-2 right-2">
-                  <span className="inline-block px-2 py-1 bg-black/60 backdrop-blur-sm text-white text-xs rounded border border-white/20">
+                
+                {/* Category Tag */}
+                <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                  <span className="px-2 py-1 bg-white/10 backdrop-blur-md border border-white/20 rounded text-[10px] text-white font-medium">
                     {language === 'zh' ? book.category : book.categoryEn}
-                    </span>
+                  </span>
                 </div>
               </div>
               
-              {/* Book Info */}
-              <div className="px-1">
-                <h4 className="text-sm font-bold text-white mb-1 line-clamp-2 group-hover:text-orange-400 transition-colors">
+              {/* Info - Minimalist Typography */}
+              <div className="space-y-1">
+                <h4 className="text-sm font-semibold text-gray-200 line-clamp-1 group-hover:text-white transition-colors">
                   {language === 'zh' ? book.title : book.titleEn}
                 </h4>
-                <p className="text-xs text-gray-400">
+                <p className="text-xs text-gray-500 group-hover:text-gray-400 transition-colors">
                   {language === 'zh' ? book.author : book.authorEn}
                 </p>
               </div>
             </div>
           ))}
-          </div>
+        </div>
 
-        {/* Reading Goals */}
-        <div>
-          <h3 className="text-2xl font-bold text-white mb-8 text-center">
+        {/* Reading Goals - Apple Health Style Widgets */}
+        <div className="mt-32">
+          <h3 className="text-2xl font-semibold text-white mb-10 text-center tracking-tight">
             {language === 'zh' ? '阅读目标' : 'Reading Goals'}
           </h3>
-          <div className="max-w-3xl mx-auto space-y-6">
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {readingGoals.map((goal, index) => (
-              <div key={index} className="glass-card rounded-xl p-6 animate-fade-in transition-all duration-500" style={{ animationDelay: `${index * 100}ms` }}>
-                <div className="flex items-center justify-between mb-3">
-                  <h4 className="text-lg font-semibold text-white">
+              <div 
+                key={index} 
+                className="apple-glass rounded-2xl p-6 flex flex-col justify-between h-48 animate-fade-in hover:bg-white/5 transition-colors"
+                style={{ animationDelay: `${index * 100 + 600}ms` }}
+              >
+                <div className="flex justify-between items-start">
+                  <span className="text-3xl bg-white/10 w-12 h-12 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                    {goal.icon}
+                  </span>
+                  <span className="text-2xl font-bold text-white">{goal.progress}%</span>
+                </div>
+                
+                <div>
+                  <h4 className="text-sm font-medium text-gray-300 mb-4 h-10 flex items-center">
                     {language === 'zh' ? goal.goal : goal.goalEn}
                   </h4>
-                  <span className="text-sm font-bold text-gray-50">{goal.progress}%</span>
-                </div>
-                <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
-                  <div
-                    className="bg-gradient-to-r from-green-500 to-emerald-500 h-full rounded-full transition-all duration-1000"
-                    style={{ width: `${goal.progress}%` }}
-                  />
+                  <div className="w-full bg-gray-700/50 rounded-full h-1.5 overflow-hidden">
+                    <div
+                      className="bg-gradient-to-r from-blue-500 to-purple-500 h-full rounded-full transition-all duration-1000 ease-out"
+                      style={{ width: `${goal.progress}%` }}
+                    />
+                  </div>
                 </div>
               </div>
             ))}
