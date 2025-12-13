@@ -7,6 +7,32 @@ export default function ProgrammingSection() {
 
   const projects = [
     {
+      title: 'AgentCon Deep Research',
+      titleEn: 'AgentCon Deep Research',
+      description: '微软AgentCon活动：构建Deep Research AI Agent',
+      descriptionEn: 'Microsoft AgentCon Workshop: Building Deep Research AI Agent',
+      detailedDescription: '参加了微软AgentCon Deep Research Workshop（2025年12月），完成了全部12个任务，成功构建了一个功能完整的Deep Research Agent。该Agent能够自动浏览网页、解析PDF文档，并进行深度信息检索和分析。通过这个workshop，深入学习了AI Agent的架构设计、工具调用机制和多模态信息处理。',
+      detailedDescriptionEn: 'Participated in Microsoft AgentCon Deep Research Workshop (Dec 2025), completed all 12 tasks and successfully built a fully functional Deep Research Agent. The agent can automatically browse the web, parse PDF documents, and perform deep information retrieval and analysis. Through this workshop, gained deep understanding of AI Agent architecture design, tool calling mechanisms, and multimodal information processing.',
+      tags: ['AI Agent', 'Deep Research', 'Microsoft', 'Workshop'],
+      tech: ['Python', 'LangChain', 'Web Scraping', 'PDF Parsing', 'Azure'],
+      status: '已完成',
+      statusEn: 'Completed',
+      link: 'https://github.com/IssamLaradji/agentcon_deep_research',
+    },
+    {
+      title: 'Contoso Pizza Workshop',
+      titleEn: 'Contoso Pizza Workshop',
+      description: '微软Azure AI Foundry：构建PizzaBot智能代理',
+      descriptionEn: 'Microsoft Azure AI Foundry: Building PizzaBot Agent',
+      detailedDescription: '参加了微软Contoso Pizza Workshop，学习使用Azure AI Foundry构建智能代理。完成了完整的workshop课程，成功构建并部署了PizzaBot Agent。项目使用GitHub Codespaces作为开发环境，部署在Azure Static Web Apps上。通过这个workshop，掌握了Azure云服务和AI Agent开发的实践技能。',
+      detailedDescriptionEn: 'Participated in Microsoft Contoso Pizza Workshop, learning to build intelligent agents using Azure AI Foundry. Completed the full workshop curriculum and successfully built and deployed the PizzaBot Agent. The project uses GitHub Codespaces as development environment, deployed on Azure Static Web Apps. Through this workshop, gained practical skills in Azure cloud services and AI Agent development.',
+      tags: ['Azure', 'AI Foundry', 'Microsoft', 'Workshop'],
+      tech: ['Python', 'Azure Static Web Apps', 'GitHub Codespaces', 'AI Agent'],
+      status: '已完成',
+      statusEn: 'Completed',
+      link: 'https://jolly-field-035345f1e.2.azurestaticapps.net/dev-environment.html',
+    },
+    {
       title: 'Abundra Capital',
       titleEn: 'Abundra Capital',
       description: '创新的数字资本平台，整合AI、区块链和投资管理',
