@@ -74,7 +74,7 @@ export default function HeroSection() {
                 alt="Khalil"
                 width={128}
                 height={128}
-                className="object-cover w-full h-full rotate-180"
+                className="object-cover w-full h-full"
                 priority
               />
             </div>
