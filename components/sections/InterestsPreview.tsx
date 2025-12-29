@@ -1,9 +1,32 @@
 'use client';
 
-import Card from '@/components/ui/Card';
 import { useLanguage } from '@/lib/LanguageContext';
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1] as const,
+    },
+  },
+};
 
 export default function InterestsPreview() {
   const { language } = useLanguage();
@@ -23,7 +46,9 @@ export default function InterestsPreview() {
       count: '6位音乐人',
       countEn: '6 Artists',
       image: '/images/fang.jpeg',
-      gradient: 'from-purple-600 to-pink-600',
+      accentColor: 'from-violet-500 to-purple-600',
+      accentBorder: 'group-hover:border-violet-500/30',
+      accentText: 'group-hover:text-violet-400',
       link: '/music',
     },
     {
@@ -40,7 +65,9 @@ export default function InterestsPreview() {
       count: '5部经典作品',
       countEn: '5 Classic Works',
       image: '/images/la-la-land.jpg',
-      gradient: 'from-blue-600 to-cyan-600',
+      accentColor: 'from-cyan-500 to-blue-600',
+      accentBorder: 'group-hover:border-cyan-500/30',
+      accentText: 'group-hover:text-cyan-400',
       link: '/movies',
     },
     {
@@ -57,7 +84,9 @@ export default function InterestsPreview() {
       count: '3个项目',
       countEn: '3 Projects',
       image: null,
-      gradient: 'from-green-600 to-emerald-600',
+      accentColor: 'from-emerald-500 to-green-600',
+      accentBorder: 'group-hover:border-emerald-500/30',
+      accentText: 'group-hover:text-emerald-400',
       link: '/programming',
     },
     {
@@ -74,7 +103,9 @@ export default function InterestsPreview() {
       count: '投资组合',
       countEn: 'Portfolio',
       image: null,
-      gradient: 'from-yellow-600 to-orange-600',
+      accentColor: 'from-amber-500 to-orange-600',
+      accentBorder: 'group-hover:border-amber-500/30',
+      accentText: 'group-hover:text-amber-400',
       link: '/investing',
     },
     {
@@ -91,106 +122,140 @@ export default function InterestsPreview() {
       count: '精选书单',
       countEn: 'Selected Books',
       image: '/images/my-brilliant-friend-hd.jpg',
-      gradient: 'from-indigo-600 to-violet-600',
+      accentColor: 'from-rose-500 to-pink-600',
+      accentBorder: 'group-hover:border-rose-500/30',
+      accentText: 'group-hover:text-rose-400',
       link: '/reading',
     },
   ];
 
   return (
-    <section id="interests" className="py-24 dark-section relative overflow-hidden">
-      {/* 背景装饰 */}
+    <section id="interests" className="py-28 dark-section relative overflow-hidden">
+      {/* Ambient Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-10 w-96 h-96 bg-orange-500/12 rounded-full filter blur-3xl animate-float"></div>
-        <div className="absolute bottom-1/4 right-10 w-80 h-80 bg-cyan-500/10 rounded-full filter blur-3xl animate-float-delay"></div>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-amber-500/5 rounded-full filter blur-[150px]" />
+        <div className="absolute bottom-0 right-0 w-[600px] h-[400px] bg-cyan-500/5 rounded-full filter blur-[120px]" />
       </div>
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
-        {/* Section Title */}
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 bg-gradient-to-r from-orange-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
-            {language === 'zh' ? '关于我' : 'About Me'}
+        {/* Section Header */}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <span className="inline-block px-4 py-1.5 mb-6 text-xs font-medium tracking-wider uppercase text-amber-400 bg-amber-500/10 border border-amber-500/20 rounded-full">
+            {language === 'zh' ? '探索' : 'Explore'}
+          </span>
+          <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
+            <span className="gradient-text">
+              {language === 'zh' ? '关于我' : 'About Me'}
+            </span>
           </h2>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+          <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
             {language === 'zh'
               ? '探索我的多彩世界，点击了解更多'
               : 'Explore my colorful world, click to learn more'}
           </p>
-        </div>
+        </motion.div>
 
         {/* Interests Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {interests.map((interest, index) => (
-            <Link key={interest.id} href={interest.link}>
-              <div
-                className="relative h-[420px] rounded-xl overflow-hidden group cursor-pointer animate-fade-in transition-all duration-500 hover:scale-105"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                {/* Background Image or Gradient */}
-                {interest.image ? (
-                  <>
-                    <div className="absolute inset-0">
-                      <Image
-                        src={interest.image}
-                        alt={language === 'zh' ? interest.title : interest.titleEn}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      />
+        <motion.div
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          {interests.map((interest) => (
+            <motion.div key={interest.id} variants={cardVariants}>
+              <Link href={interest.link} className="block h-full">
+                <article
+                  className={`group relative h-[420px] rounded-2xl overflow-hidden cursor-pointer glass-card ${interest.accentBorder} transition-all duration-500`}
+                >
+                  {/* Background Image or Gradient */}
+                  {interest.image ? (
+                    <>
+                      <div className="absolute inset-0">
+                        <Image
+                          src={interest.image}
+                          alt={language === 'zh' ? interest.title : interest.titleEn}
+                          fill
+                          className="object-cover transition-transform duration-700 group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        />
+                      </div>
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-zinc-950/40 group-hover:from-zinc-950 group-hover:via-zinc-950/85 transition-all duration-500" />
+                    </>
+                  ) : (
+                    /* Abstract gradient background for cards without images */
+                    <div className={`absolute inset-0 bg-gradient-to-br ${interest.accentColor} opacity-10 group-hover:opacity-15 transition-opacity duration-500`} />
+                  )}
+
+                  {/* Content */}
+                  <div className="relative h-full flex flex-col justify-between p-6">
+                    {/* Top Section */}
+                    <div>
+                      {/* Icon */}
+                      <div className="text-4xl mb-4 transform group-hover:scale-110 transition-transform duration-500">
+                        {interest.icon}
+                      </div>
+
+                      {/* Title & Count */}
+                      <h3 className={`font-display text-2xl font-bold text-zinc-100 mb-2 ${interest.accentText} transition-colors duration-300`}>
+                        {language === 'zh' ? interest.title : interest.titleEn}
+                      </h3>
+                      <span className="inline-block px-2.5 py-1 text-xs font-medium text-zinc-400 bg-zinc-800/50 rounded-md border border-zinc-700/50">
+                        {language === 'zh' ? interest.count : interest.countEn}
+                      </span>
                     </div>
-                    {/* Gradient Overlay for images */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/30 group-hover:from-black/95 group-hover:via-black/70 transition-all duration-500"></div>
-                  </>
-                ) : (
-                  /* Pure gradient background for cards without images */
-                  <div className={`absolute inset-0 bg-gradient-to-br ${interest.gradient} opacity-90 group-hover:opacity-95 transition-opacity duration-500`}></div>
-                )}
 
-                {/* Content */}
-                <div className="relative h-full flex flex-col justify-between p-6">
-                  {/* Top: Icon and Title */}
-                  <div>
-                    <div className="text-5xl mb-3 group-hover:scale-110 transition-transform filter drop-shadow-lg">
-                      {interest.icon}
-                    </div>
-                    <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-green-400 transition-colors">
-                      {language === 'zh' ? interest.title : interest.titleEn}
-                    </h3>
-                    <p className="text-sm text-gray-200 font-medium mb-4">
-                      {language === 'zh' ? interest.count : interest.countEn}
-                    </p>
-                  </div>
+                    {/* Bottom Section */}
+                    <div className="space-y-4">
+                      {/* Description */}
+                      <p className="text-sm text-zinc-300 leading-relaxed line-clamp-3">
+                        {language === 'zh' ? interest.longDescription : interest.longDescriptionEn}
+                      </p>
 
-                  {/* Bottom: Description and Tags */}
-                  <div className="space-y-4">
-                    <p className="text-sm text-gray-100 leading-relaxed">
-                      {language === 'zh' ? interest.longDescription : interest.longDescriptionEn}
-                    </p>
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2">
+                        {(language === 'zh' ? interest.highlights : interest.highlightsEn).slice(0, 3).map((highlight, idx) => (
+                          <span
+                            key={idx}
+                            className="px-2.5 py-1 text-xs text-zinc-400 bg-zinc-800/60 rounded-md border border-zinc-700/50 backdrop-blur-sm"
+                          >
+                            {highlight}
+                          </span>
+                        ))}
+                      </div>
 
-                    {/* Highlights as tags */}
-                    <div className="flex flex-wrap gap-2">
-                      {(language === 'zh' ? interest.highlights : interest.highlightsEn).slice(0, 3).map((highlight, idx) => (
-                        <span
-                          key={idx}
-                          className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-xs rounded-full border border-white/30"
+                      {/* View More Link */}
+                      <div className={`flex items-center gap-2 text-sm font-medium text-zinc-400 ${interest.accentText} transition-colors duration-300`}>
+                        <span>{language === 'zh' ? '查看详情' : 'View Details'}</span>
+                        <svg
+                          className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
                         >
-                          {highlight}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* View more link */}
-                    <div className="flex items-center gap-1 text-sm text-white group-hover:text-green-400 font-medium transition-colors">
-                      {language === 'zh' ? '查看详情' : 'View Details'}
-                      <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </Link>
+
+                  {/* Hover Glow Effect */}
+                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}>
+                    <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-gradient-to-t ${interest.accentColor} blur-3xl opacity-20`} />
+                  </div>
+                </article>
+              </Link>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

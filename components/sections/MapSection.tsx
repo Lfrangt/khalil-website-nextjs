@@ -22,7 +22,7 @@ export default function MapSection() {
     <section className="dark-section py-12 md:py-16">
       <div className="container-custom">
         <div className="max-w-4xl mx-auto">
-          <div className="h-[280px] md:h-[320px] rounded-xl overflow-hidden card-shadow animate-slide-up">
+          <div className="relative h-[300px] md:h-[350px] rounded-2xl overflow-hidden shadow-2xl">
             <NomadMap />
           </div>
         </div>

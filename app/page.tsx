@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 import HeroSection from '@/components/sections/HeroSection';
 import MapSection from '@/components/sections/MapSection';
-import InfluencersPreview from '@/components/sections/InfluencersPreview';
 import InterestsPreview from '@/components/sections/InterestsPreview';
 import ContactSection from '@/components/sections/ContactSection';
 
@@ -19,7 +18,6 @@ export default function Home() {
     <>
       <HeroSection />
       <InterestsPreview />
-      <InfluencersPreview />
       <MapSection />
       <ContactSection />
     </>
