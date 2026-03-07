@@ -35,6 +35,7 @@ export default function ProgrammingSection() {
     {
       title: 'Abundra Capital',
       titleEn: 'Abundra Capital',
+      hideLink: true,
       description: '创新的数字资本平台，整合AI、区块链和投资管理',
       descriptionEn: 'Innovative digital capital platform integrating AI, blockchain, and investment management',
       detailedDescription: 'Abundra Capital是我创立的创新项目，旨在将AI技术、区块链和传统投资管理相结合。项目包含三个核心模块：AI Lab用于开发智能投资分析工具，Blockchain R&D专注于DeFi协议和智能合约开发，Digital Capital负责数字资产的配置和管理。目前正在开发基于Cardano的DeFi协议和AI驱动的投资组合优化系统。',
@@ -48,6 +49,7 @@ export default function ProgrammingSection() {
     {
       title: 'Cardano Identity DApp',
       titleEn: 'Cardano Identity DApp',
+      hideLink: true,
       description: '基于Cardano区块链的去中心化身份验证应用',
       descriptionEn: 'Decentralized identity verification application built on Cardano blockchain',
       detailedDescription: '这是我正在开发的Cardano生态DApp项目，致力于实现去中心化身份验证功能。使用Plutus语言编写智能合约，处理链上身份数据和验证逻辑。前端使用Lucid库与Cardano区块链集成，实现钱包连接、交易构建和链上数据查询。通过这个项目，我正在深入学习eUTxO模型和Cardano的去中心化身份(DID)实现。',
@@ -344,7 +346,7 @@ export default function ProgrammingSection() {
                 </div>
 
                 {/* Project Link */}
-                {project.link && project.link !== '#' && (
+                {project.link && project.link !== '#' && !project.hideLink && (
                   <div className="mt-4 pt-4 border-t border-white/10">
                     <a
                       href={project.link}
