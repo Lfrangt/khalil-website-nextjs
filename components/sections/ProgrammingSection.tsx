@@ -346,7 +346,7 @@ export default function ProgrammingSection() {
                 </div>
 
                 {/* Project Link */}
-                {project.link && project.link !== '#' && !project.hideLink && (
+                {project.link && project.link !== '#' && project.title !== 'Abundra Capital' && project.title !== 'Cardano Identity DApp' && (
                   <div className="mt-4 pt-4 border-t border-white/10">
                     <a
                       href={project.link}
