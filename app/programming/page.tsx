@@ -2,10 +2,10 @@ import ProgrammingSection from '@/components/sections/ProgrammingSection';
 
 export const metadata = {
   title: 'Programming',
-  description: 'My Cardano DApp development projects and tech stack - Plutus smart contracts, Web3 frontend integration, and blockchain technology.',
+  description: 'My projects and tech stack — Pulse Watch (Apple Watch AI app), Cardano DApp development, AI Agents, and blockchain technology.',
   openGraph: {
     title: 'Programming | Khalil',
-    description: 'My Cardano DApp development projects and tech stack - Plutus smart contracts, Web3 frontend integration, and blockchain technology.',
+    description: 'My projects and tech stack — Pulse Watch (Apple Watch AI app), Cardano DApp development, AI Agents, and blockchain technology.',
   },
 };
 

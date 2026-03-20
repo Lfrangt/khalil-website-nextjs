@@ -7,6 +7,19 @@ export default function ProgrammingSection() {
 
   const projects = [
     {
+      title: 'Pulse Watch',
+      titleEn: 'Pulse Watch',
+      description: 'Apple Watch 健康 AI app — 恢复评分、HRV 趋势、训练建议，AI 教练驱动',
+      descriptionEn: 'Apple Watch health AI app — recovery scoring, HRV trends, training suggestions, powered by AI coach',
+      detailedDescription: 'Pulse Watch 是一款 Apple Watch 原生健身 AI app，基于 HealthKit 实时读取心率、HRV、血氧、睡眠等数据，计算每日恢复评分（0-100），并通过 OpenClaw AI 教练提供个性化训练建议。技术栈：SwiftUI + HealthKit + SwiftData + watchOS Widget，买断制 $4.99 CAD，品牌 Abundra。从 0 到完整产品，50+ commits，独立完成。',
+      detailedDescriptionEn: 'Pulse Watch is a native Apple Watch fitness AI app that reads heart rate, HRV, SpO2, and sleep data via HealthKit in real-time, calculates a daily recovery score (0-100), and delivers personalized training recommendations through an OpenClaw AI coach. Built with SwiftUI + HealthKit + SwiftData + watchOS Widgets. One-time purchase at $4.99 CAD under the Abundra brand. Built entirely independently with 50+ commits from scratch.',
+      tags: ['iOS', 'watchOS', 'SwiftUI', 'HealthKit', 'AI Coach'],
+      tech: ['Swift', 'SwiftUI', 'HealthKit', 'SwiftData', 'WidgetKit', 'OpenClaw'],
+      status: '开发中',
+      statusEn: 'In Development',
+      link: 'https://github.com/Lfrangt/pulse-watch',
+    },
+    {
       title: 'AgentCon Deep Research',
       titleEn: 'AgentCon Deep Research',
       description: '微软AgentCon活动：构建Deep Research AI Agent',
