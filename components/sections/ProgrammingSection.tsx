@@ -286,86 +286,93 @@ export default function ProgrammingSection() {
     },
   ];
 
+  // Assign bento sizes to projects for visual variety
+  const bentoSizes: Record<number, string> = {
+    0: 'bento-featured',  // Pulse Watch — wide featured
+    1: '',                // AgentCon — standard
+    2: '',                // Contoso — standard
+    3: 'bento-wide',     // Abundra Capital — wide
+    4: '',                // Cardano Identity — standard
+    5: '',                // Personal Website — standard
+    6: 'bento-wide',     // Web3 Learning — wide
+    7: '',                // AI Agent — standard
+  };
+
   return (
-    <section id="programming" className="py-24 dark-section">
-      <div className="max-w-6xl mx-auto px-6 space-y-20 relative z-10">
+    <section id="programming" className="py-32 dark-section">
+      <div className="max-w-7xl mx-auto px-8 space-y-28 relative z-10">
         {/* Section Title */}
-        <div className="text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+        <div className="text-center space-y-5">
+          <h2 className="text-4xl md:text-6xl font-extrabold gradient-text-hero tracking-tight">
             {language === 'zh' ? '编程 & 技术' : 'Programming & Tech'}
           </h2>
-          <p className="text-gray-100 max-w-2xl mx-auto">
+          <p className="text-zinc-400 max-w-2xl mx-auto text-lg">
             {language === 'zh'
               ? '我的项目、技术栈和学习历程'
               : 'My projects, tech stack and learning journey'}
           </p>
         </div>
 
-        {/* Projects Grid */}
+        {/* Projects Bento Grid */}
         <div>
-          <h3 className="text-2xl font-bold text-white mb-8 text-center">
+          <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-10 text-center tracking-tight">
             {language === 'zh' ? '项目展示' : 'Projects'}
           </h3>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="bento-grid">
             {projects.map((project, index) => (
-              <div key={index} className="glass-card rounded-xl p-6 animate-fade-in transition-all duration-500" style={{ animationDelay: `${index * 100}ms` }}>
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-xl font-bold text-white">
+              <div
+                key={index}
+                className={`bento-card animate-fade-in ${bentoSizes[index] || ''}`}
+                style={{ animationDelay: `${index * 80}ms` }}
+              >
+                {/* Status badge */}
+                <div className="flex items-start justify-between mb-4">
+                  <h3 className="text-xl font-bold text-white leading-tight">
                     {language === 'zh' ? project.title : project.titleEn}
                   </h3>
-                  <span className={`px-3 py-1 text-xs rounded-full font-medium ${
+                  <span className={`shrink-0 ml-3 px-3 py-1 text-[11px] rounded-full font-semibold tracking-wide uppercase ${
                     project.status === '已完成' || project.statusEn === 'Completed'
-                      ? 'bg-green-500/20 text-green-400 border border-green-500/30'
+                      ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/25'
                       : project.status === '开发中' || project.status === '建设中' || project.statusEn === 'In Development' || project.statusEn === 'Building'
-                      ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                      : 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
+                      ? 'bg-blue-500/15 text-blue-400 border border-blue-500/25'
+                      : 'bg-amber-500/15 text-amber-400 border border-amber-500/25'
                   }`}>
                     {language === 'zh' ? project.status : project.statusEn}
                   </span>
                 </div>
 
-                <p className="text-gray-100 text-sm mb-4 leading-relaxed">
+                <p className="text-zinc-400 text-sm mb-5 leading-relaxed line-clamp-4">
                   {language === 'zh' ? project.detailedDescription : project.detailedDescriptionEn}
                 </p>
 
-                <div className="space-y-3">
-                  {/* Main Tags */}
-                  <div>
-                    <p className="text-xs text-gray-400 mb-2 font-medium">
-                      {language === 'zh' ? '技术领域:' : 'Tech Domains:'}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
-                        <span key={tag} className="px-3 py-1 bg-white/10 text-gray-200 text-xs rounded-full border border-white/20">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                <div className="space-y-4 mt-auto">
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="px-2.5 py-1 bg-white/[0.06] text-zinc-300 text-xs rounded-lg border border-white/[0.08] font-medium">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
 
                   {/* Tech Stack */}
-                  <div>
-                    <p className="text-xs text-gray-400 mb-2 font-medium">
-                      {language === 'zh' ? '技术栈:' : 'Tech Stack:'}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tech.map((tech) => (
-                        <span key={tech} className="px-2 py-1 bg-white/5 text-gray-300 text-xs rounded border border-white/10">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.tech.map((tech) => (
+                      <span key={tech} className="px-2 py-0.5 text-zinc-500 text-[11px] font-mono">
+                        {tech}
+                      </span>
+                    ))}
                   </div>
                 </div>
 
                 {/* Project Link */}
                 {project.link && project.link !== '#' && project.title !== 'Abundra Capital' && project.title !== 'Cardano Identity DApp' && (
-                  <div className="mt-4 pt-4 border-t border-white/10">
+                  <div className="mt-5 pt-4 border-t border-white/[0.06]">
                     <a
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg text-sm font-medium transition-colors"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black rounded-xl text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/20"
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -381,19 +388,20 @@ export default function ProgrammingSection() {
 
         {/* Tech Stack */}
         <div>
-          <h3 className="text-2xl font-bold text-white mb-8 text-center">
+          <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-10 text-center tracking-tight">
             {language === 'zh' ? '技术栈' : 'Tech Stack'}
           </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
             {skillCategories.map((category, catIndex) => (
-              <div key={catIndex} className="bg-slate-800 rounded-xl p-6 animate-fade-in" style={{ animationDelay: `${catIndex * 100}ms` }}>
-                <h4 className="text-base font-semibold text-white mb-4">
+              <div key={catIndex} className="bento-card animate-fade-in" style={{ animationDelay: `${catIndex * 80}ms` }}>
+                <h4 className="text-base font-bold text-white mb-5 pb-3 border-b border-white/[0.06]">
                   {language === 'zh' ? category.category : category.categoryEn}
                 </h4>
-                <div className="space-y-2">
+                <div className="space-y-2.5">
                   {category.skills.map((skill) => (
-                    <div key={skill.name} className="text-sm text-gray-300">
-                      • {language === 'zh' ? skill.name : (skill.nameEn || skill.name)}
+                    <div key={skill.name} className="text-sm text-zinc-400 flex items-center gap-2">
+                      <span className="w-1 h-1 rounded-full bg-amber-500/60 shrink-0" />
+                      {language === 'zh' ? skill.name : (skill.nameEn || skill.name)}
                     </div>
                   ))}
                 </div>
@@ -404,25 +412,25 @@ export default function ProgrammingSection() {
 
         {/* Web3 & Blockchain Exploration */}
         <div>
-          <h3 className="text-2xl font-bold text-white mb-4 text-center">
+          <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-5 text-center tracking-tight">
             {language === 'zh' ? 'Web3与区块链探索' : 'Web3 & Blockchain Exploration'}
           </h3>
-          <p className="text-gray-100 text-center max-w-3xl mx-auto mb-8 leading-relaxed">
+          <p className="text-zinc-400 text-center max-w-3xl mx-auto mb-10 leading-relaxed text-lg">
             {language === 'zh'
               ? '作为Web3生态的探索者，我对去中心化技术的潜力充满信心。通过研究与实践，探索区块链技术如何重塑互联网的未来。'
               : 'As a Web3 ecosystem explorer, I am confident in the potential of decentralized technology. Through research and practice, exploring how blockchain technology reshapes the future of the Internet.'}
           </p>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-5">
             {web3Areas.map((area, index) => (
-              <div key={index} className="glass-card rounded-xl p-6 animate-fade-in transition-all duration-500" style={{ animationDelay: `${index * 100}ms` }}>
-                <div className="text-4xl mb-4">{area.icon}</div>
+              <div key={index} className="bento-card glow-border animate-fade-in" style={{ animationDelay: `${index * 80}ms` }}>
+                <div className="text-4xl mb-5">{area.icon}</div>
                 <h4 className="text-lg font-bold text-white mb-4">
                   {language === 'zh' ? area.title : area.titleEn}
                 </h4>
-                <ul className="space-y-2">
+                <ul className="space-y-2.5">
                   {area.items.map((item, idx) => (
-                    <li key={idx} className="text-sm text-gray-100 flex items-start gap-2">
-                      <span className="text-gray-400 mt-1">•</span>
+                    <li key={idx} className="text-sm text-zinc-400 flex items-start gap-2.5">
+                      <span className="w-1 h-1 rounded-full bg-cyan-500/60 mt-2 shrink-0" />
                       <span>{language === 'zh' ? item.text : item.textEn}</span>
                     </li>
                   ))}
@@ -434,20 +442,23 @@ export default function ProgrammingSection() {
 
         {/* Abundra Capital - Detailed Section */}
         <div>
-          <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 text-center">
-            🚀 Abundra Capital - {language === 'zh' ? '我的创新项目' : 'My Innovation Project'}
+          <h3 className="text-3xl md:text-5xl font-extrabold gradient-text mb-5 text-center tracking-tight">
+            Abundra Capital
           </h3>
-          <p className="text-gray-100 text-center max-w-3xl mx-auto mb-8 leading-relaxed">
+          <p className="text-zinc-500 text-center text-sm font-semibold uppercase tracking-widest mb-3">
+            {language === 'zh' ? '我的创新项目' : 'My Innovation Project'}
+          </p>
+          <p className="text-zinc-400 text-center max-w-3xl mx-auto mb-10 leading-relaxed text-lg">
             {language === 'zh'
               ? 'Abundra Capital是我创立的创新项目，致力于构建AI、区块链和数字资产融合的未来金融基础设施。这个项目体现了我对前沿技术的热情和对未来数字经济的愿景。'
               : 'Abundra Capital is an innovative project I founded, dedicated to building future financial infrastructure that integrates AI, blockchain, and digital assets. This project embodies my passion for cutting-edge technology and vision for the future digital economy.'}
           </p>
-          <div className="text-center mb-8">
+          <div className="text-center mb-10">
             <a
               href="https://abundra-website.vercel.app"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 hover:scale-105 transition-all font-medium"
+              className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black rounded-2xl font-bold transition-all duration-300 hover:shadow-xl hover:shadow-amber-500/20 hover:-translate-y-0.5"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -455,20 +466,20 @@ export default function ProgrammingSection() {
               {language === 'zh' ? '访问 Abundra Capital 官网' : 'Visit Abundra Capital Website'}
             </a>
           </div>
-          <div className="grid md:grid-cols-3 gap-6 mb-8">
+          <div className="grid md:grid-cols-3 gap-5 mb-10">
             {abundraModules.map((module, index) => (
-              <div key={index} className="glass-card rounded-xl p-6 animate-fade-in transition-all duration-500" style={{ animationDelay: `${index * 100}ms` }}>
-                <div className="text-4xl mb-4">{module.icon}</div>
+              <div key={index} className="bento-card glow-border animate-fade-in" style={{ animationDelay: `${index * 80}ms` }}>
+                <div className="text-4xl mb-5">{module.icon}</div>
                 <h4 className="text-xl font-bold text-white mb-3">
                   {language === 'zh' ? module.title : module.titleEn}
                 </h4>
-                <p className="text-sm text-gray-100 mb-4 leading-relaxed">
+                <p className="text-sm text-zinc-400 mb-5 leading-relaxed">
                   {language === 'zh' ? module.description : module.descriptionEn}
                 </p>
-                <ul className="space-y-2">
+                <ul className="space-y-2.5">
                   {module.items.map((item, idx) => (
-                    <li key={idx} className="text-sm text-gray-100 flex items-start gap-2">
-                      <span className="text-gray-400">✓</span>
+                    <li key={idx} className="text-sm text-zinc-400 flex items-start gap-2.5">
+                      <span className="text-emerald-500/70">&#10003;</span>
                       <span>{language === 'zh' ? item.text : item.textEn}</span>
                     </li>
                   ))}
@@ -476,13 +487,13 @@ export default function ProgrammingSection() {
               </div>
             ))}
           </div>
-          <div className="glass-card rounded-xl p-6 border-l-4 border-green-500/50">
-            <blockquote className="text-lg md:text-xl text-gray-50 italic text-center leading-relaxed">
+          <div className="bento-card border-l-4 border-l-emerald-500/40">
+            <blockquote className="text-xl md:text-2xl text-zinc-200 italic text-center leading-relaxed font-light">
               {language === 'zh'
                 ? '"财富不仅仅是资本，更是冷静、清晰和代码。"'
                 : '"Wealth is not just capital, but calmness, clarity, and code."'}
             </blockquote>
-            <p className="text-sm text-gray-400 mt-3 text-center">
+            <p className="text-sm text-zinc-500 mt-4 text-center font-medium">
               — Abundra Capital {language === 'zh' ? '核心理念' : 'Core Philosophy'}
             </p>
           </div>
@@ -490,23 +501,23 @@ export default function ProgrammingSection() {
 
         {/* Future Technology Research */}
         <div>
-          <h3 className="text-2xl font-bold text-white mb-8 text-center">
+          <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-10 text-center tracking-tight">
             {language === 'zh' ? '未来技术研究方向' : 'Future Research Directions'}
           </h3>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-5">
             {futureResearch.map((research, index) => (
-              <div key={index} className="glass-card rounded-xl p-6 animate-fade-in transition-all duration-500" style={{ animationDelay: `${index * 100}ms` }}>
-                <div className="text-4xl mb-4">{research.icon}</div>
+              <div key={index} className="bento-card glow-border animate-fade-in" style={{ animationDelay: `${index * 80}ms` }}>
+                <div className="text-4xl mb-5">{research.icon}</div>
                 <h4 className="text-xl font-bold text-white mb-3">
                   {language === 'zh' ? research.title : research.titleEn}
                 </h4>
-                <p className="text-sm text-gray-100 mb-4 leading-relaxed">
+                <p className="text-sm text-zinc-400 mb-5 leading-relaxed">
                   {language === 'zh' ? research.description : research.descriptionEn}
                 </p>
-                <ul className="space-y-2">
+                <ul className="space-y-2.5">
                   {research.items.map((item, idx) => (
-                    <li key={idx} className="text-sm text-gray-100 flex items-start gap-2">
-                      <span className="text-gray-400 mt-1">→</span>
+                    <li key={idx} className="text-sm text-zinc-400 flex items-start gap-2.5">
+                      <span className="text-amber-500/60 mt-0.5">&#8594;</span>
                       <span>{language === 'zh' ? item.text : item.textEn}</span>
                     </li>
                   ))}
@@ -518,19 +529,19 @@ export default function ProgrammingSection() {
 
         {/* Learning Goals */}
         <div>
-          <h3 className="text-2xl font-bold text-white mb-8 text-center">
+          <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-10 text-center tracking-tight">
             {language === 'zh' ? '学习目标' : 'Learning Goals'}
           </h3>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-5">
             {learningGoals.map((goal, index) => (
-              <div key={index} className="glass-card rounded-xl p-6 text-center animate-fade-in transition-all duration-500" style={{ animationDelay: `${index * 100}ms` }}>
-                <div className="w-12 h-12 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-4 ring-2 ring-green-500/30">
+              <div key={index} className="bento-card glow-border text-center animate-fade-in" style={{ animationDelay: `${index * 80}ms` }}>
+                <div className="w-14 h-14 bg-gradient-to-br from-emerald-500/15 to-cyan-500/15 rounded-2xl flex items-center justify-center mx-auto mb-5 border border-emerald-500/20">
                   <span className="text-2xl">{index === 0 ? '🎯' : index === 1 ? '🤖' : '🌟'}</span>
                 </div>
                 <h4 className="text-lg font-bold text-white mb-3">
                   {language === 'zh' ? goal.goal : goal.goalEn}
                 </h4>
-                <p className="text-sm text-gray-100 leading-relaxed">
+                <p className="text-sm text-zinc-400 leading-relaxed">
                   {language === 'zh' ? goal.description : goal.descriptionEn}
                 </p>
               </div>

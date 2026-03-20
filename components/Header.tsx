@@ -62,32 +62,32 @@ export default function Header() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
           scrolled
-            ? 'glass border-b border-zinc-800/50'
+            ? 'glass-2-nav'
             : 'bg-transparent'
         }`}
       >
-        <nav className="max-w-6xl mx-auto px-6 py-4">
+        <nav className="max-w-7xl mx-auto px-8 py-5">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link
               href="/"
-              className="group relative font-display text-xl font-bold tracking-tight"
+              className="group relative font-display text-2xl font-extrabold tracking-tight"
             >
-              <span className="relative z-10 bg-gradient-to-r from-zinc-100 to-zinc-300 bg-clip-text text-transparent group-hover:from-amber-400 group-hover:to-amber-200 transition-all duration-300">
+              <span className="relative z-10 gradient-text-hero group-hover:opacity-90 transition-opacity duration-300">
                 Khalil
               </span>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-500 to-amber-300 group-hover:w-full transition-all duration-300" />
+              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-amber-500 via-cyan-400 to-violet-500 group-hover:w-full transition-all duration-500 ease-out" />
             </Link>
 
             {/* Desktop Navigation Links */}
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden md:flex items-center gap-0.5 bg-white/[0.03] rounded-2xl px-2 py-1.5 border border-white/[0.04]">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-lg ${
+                  className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 rounded-xl ${
                     isActive(link.href)
                       ? 'text-amber-400'
                       : 'text-zinc-400 hover:text-zinc-100'
@@ -97,7 +97,7 @@ export default function Header() {
                   {isActive(link.href) && (
                     <motion.span
                       layoutId="activeIndicator"
-                      className="absolute inset-0 bg-zinc-800/50 rounded-lg -z-10"
+                      className="absolute inset-0 bg-white/[0.06] rounded-xl border border-white/[0.08] -z-10"
                       transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                     />
                   )}
@@ -110,9 +110,9 @@ export default function Header() {
               {/* Language Toggle */}
               <motion.button
                 onClick={toggleLanguage}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800/80 border border-zinc-700/50 text-sm font-medium text-zinc-300 hover:text-white hover:bg-zinc-700/80 hover:border-zinc-600/50 transition-all duration-300"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/[0.04] border border-white/[0.06] text-sm font-medium text-zinc-300 hover:text-white hover:bg-white/[0.08] hover:border-white/[0.12] transition-all duration-300"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
                 aria-label="Toggle language"
               >
                 <svg className="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -129,7 +129,7 @@ export default function Header() {
               {/* Mobile Menu Button */}
               <motion.button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 rounded-lg bg-zinc-800/80 border border-zinc-700/50 hover:bg-zinc-700/80 transition-colors"
+                className="md:hidden p-2.5 rounded-xl bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.08] transition-colors"
                 whileTap={{ scale: 0.95 }}
                 aria-label="Toggle menu"
               >
@@ -175,7 +175,7 @@ export default function Header() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="fixed top-[72px] left-4 right-4 z-50 md:hidden glass rounded-2xl border border-zinc-800/50 overflow-hidden"
+              className="fixed top-[76px] left-4 right-4 z-50 md:hidden glass-2 rounded-2xl overflow-hidden"
             >
               <nav className="p-4">
                 <div className="flex flex-col gap-1">

@@ -20,6 +20,8 @@ const config: Config = {
         'float-slow': 'float 8s ease-in-out infinite',
         'slide-up': 'slide-up 0.8s ease-out forwards',
         'scale-in': 'scale-in 0.5s ease-out forwards',
+        'glow-pulse': 'glow-pulse 3s ease-in-out infinite',
+        'border-glow': 'border-glow 3s ease-in-out infinite',
       },
       keyframes: {
         shine: {
@@ -37,6 +39,14 @@ const config: Config = {
         'scale-in': {
           '0%': { opacity: '0', transform: 'scale(0.9)' },
           '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        'glow-pulse': {
+          '0%, 100%': { boxShadow: '0 0 20px rgba(245, 158, 11, 0)' },
+          '50%': { boxShadow: '0 0 30px rgba(245, 158, 11, 0.15)' },
+        },
+        'border-glow': {
+          '0%, 100%': { borderColor: 'rgba(255, 255, 255, 0.06)' },
+          '50%': { borderColor: 'rgba(245, 158, 11, 0.3)' },
         },
       },
     },
