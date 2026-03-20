@@ -114,106 +114,6 @@ export default function ProgrammingSection() {
     },
   ];
 
-  const skillCategories = [
-    {
-      category: '前端开发',
-      categoryEn: 'Frontend Development',
-      skills: [
-        { name: 'React / Next.js', level: 85 },
-        { name: 'TypeScript', level: 80 },
-        { name: 'Tailwind CSS', level: 90 },
-        { name: 'HTML / CSS', level: 95 },
-      ],
-    },
-    {
-      category: 'Cardano开发',
-      categoryEn: 'Cardano Development',
-      skills: [
-        { name: 'Plutus智能合约', level: 70, nameEn: 'Plutus Smart Contracts' },
-        { name: 'Haskell基础', level: 65, nameEn: 'Haskell Basics' },
-        { name: 'DApp架构设计', level: 75, nameEn: 'DApp Architecture' },
-        { name: 'Lucid / Blockfrost', level: 80 },
-      ],
-    },
-    {
-      category: '区块链 & Web3',
-      categoryEn: 'Blockchain & Web3',
-      skills: [
-        { name: 'Solidity / Ethereum', level: 65 },
-        { name: 'Web3集成', level: 75, nameEn: 'Web3 Integration' },
-        { name: 'DeFi协议理解', level: 70, nameEn: 'DeFi Protocols' },
-        { name: '密码学基础', level: 60, nameEn: 'Cryptography Basics' },
-      ],
-    },
-    {
-      category: 'AI & 数据科学',
-      categoryEn: 'AI & Data Science',
-      skills: [
-        { name: 'Python', level: 80 },
-        { name: 'LangChain / AI Agent', level: 65 },
-        { name: 'RAG系统', level: 60, nameEn: 'RAG Systems' },
-        { name: '机器学习基础', level: 55, nameEn: 'ML Basics' },
-      ],
-    },
-  ];
-
-  const learningGoals = [
-    {
-      goal: '成为Cardano生态的专业DApp开发者',
-      goalEn: 'Become a professional Cardano DApp developer',
-      description: '深入掌握Plutus智能合约开发，能够独立构建完整的DeFi协议和NFT平台',
-      descriptionEn: 'Master Plutus smart contract development, able to build complete DeFi protocols and NFT platforms independently',
-    },
-    {
-      goal: '将AI技术应用于Web3领域',
-      goalEn: 'Apply AI technology to Web3',
-      description: '探索AI Agent如何自动化区块链开发、投资分析和链上数据分析',
-      descriptionEn: 'Explore how AI Agent can automate blockchain development, investment analysis, and on-chain data analysis',
-    },
-    {
-      goal: '为Cardano生态做出开源贡献',
-      goalEn: 'Contribute to Cardano ecosystem',
-      description: '开发开源工具和库，帮助更多开发者进入Cardano生态',
-      descriptionEn: 'Develop open-source tools and libraries to help more developers enter the Cardano ecosystem',
-    },
-  ];
-
-  const web3Areas = [
-    {
-      title: '区块链基础',
-      titleEn: 'Blockchain Basics',
-      icon: '🔗',
-      items: [
-        { text: '分布式账本技术原理', textEn: 'Distributed Ledger Technology' },
-        { text: '共识机制研究(PoW, PoS, Ouroboros)', textEn: 'Consensus Mechanisms (PoW, PoS, Ouroboros)' },
-        { text: '智能合约编程', textEn: 'Smart Contract Programming' },
-        { text: '密码学与安全性', textEn: 'Cryptography & Security' },
-      ],
-    },
-    {
-      title: 'DeFi生态',
-      titleEn: 'DeFi Ecosystem',
-      icon: '💰',
-      items: [
-        { text: '去中心化金融协议分析', textEn: 'DeFi Protocol Analysis' },
-        { text: '流动性挖矿与收益聚合', textEn: 'Yield Farming & Aggregators' },
-        { text: '自动做市商(AMM)模型', textEn: 'Automated Market Maker (AMM) Models' },
-        { text: '稳定币机制设计', textEn: 'Stablecoin Mechanism Design' },
-      ],
-    },
-    {
-      title: 'Cardano生态系统',
-      titleEn: 'Cardano Ecosystem',
-      icon: '⚡',
-      items: [
-        { text: 'Cardano分层架构研究', textEn: 'Cardano Layered Architecture' },
-        { text: 'Plutus智能合约开发', textEn: 'Plutus Smart Contract Development' },
-        { text: 'Ouroboros共识算法', textEn: 'Ouroboros Consensus Algorithm' },
-        { text: 'Hydra扩容解决方案', textEn: 'Hydra Scaling Solution' },
-      ],
-    },
-  ];
-
   const abundraModules = [
     {
       title: 'AI Lab',
@@ -252,36 +152,6 @@ export default function ProgrammingSection() {
         { text: '数字资产组合', textEn: 'Digital Asset Portfolio' },
         { text: '早期阶段投资', textEn: 'Early-stage Investment' },
         { text: '风险管理', textEn: 'Risk Management' },
-      ],
-    },
-  ];
-
-  const futureResearch = [
-    {
-      title: 'AI Agent 开发',
-      titleEn: 'AI Agent Development',
-      icon: '🤖',
-      description: '我对自主人工智能代理充满热情，希望深入研究AI Agent的构建与应用。这包括：',
-      descriptionEn: 'I am passionate about autonomous AI agents and want to deeply research the construction and application of AI Agents. This includes:',
-      items: [
-        { text: '多模态AI Agent架构设计', textEn: 'Multimodal AI Agent Architecture' },
-        { text: '基于大型语言模型的自主系统', textEn: 'LLM-based Autonomous Systems' },
-        { text: 'AI Agent的决策机制与工具使用能力', textEn: 'AI Agent Decision-making & Tool Usage' },
-        { text: '探索Agent间协作与集体智能', textEn: 'Multi-agent Collaboration & Collective Intelligence' },
-      ],
-    },
-    {
-      title: '区块链与Cardano',
-      titleEn: 'Blockchain & Cardano',
-      icon: '⛓️',
-      description: '我看好Cardano生态系统，计划深入研究其技术基础与应用场景：',
-      descriptionEn: 'I am optimistic about the Cardano ecosystem and plan to deeply research its technical foundation and application scenarios:',
-      items: [
-        { text: 'Cardano的Ouroboros共识机制', textEn: 'Cardano\'s Ouroboros Consensus' },
-        { text: 'Plutus智能合约开发', textEn: 'Plutus Smart Contract Development' },
-        { text: '区块链可扩展性解决方案', textEn: 'Blockchain Scalability Solutions' },
-        { text: '去中心化金融(DeFi)应用开发', textEn: 'DeFi Application Development' },
-        { text: '区块链与AI技术的融合可能性', textEn: 'Integration of Blockchain & AI' },
       ],
     },
   ];
@@ -386,60 +256,6 @@ export default function ProgrammingSection() {
           </div>
         </div>
 
-        {/* Tech Stack */}
-        <div>
-          <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-10 text-center tracking-tight">
-            {language === 'zh' ? '技术栈' : 'Tech Stack'}
-          </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {skillCategories.map((category, catIndex) => (
-              <div key={catIndex} className="bento-card animate-fade-in" style={{ animationDelay: `${catIndex * 80}ms` }}>
-                <h4 className="text-base font-bold text-white mb-5 pb-3 border-b border-white/[0.06]">
-                  {language === 'zh' ? category.category : category.categoryEn}
-                </h4>
-                <div className="space-y-2.5">
-                  {category.skills.map((skill) => (
-                    <div key={skill.name} className="text-sm text-zinc-400 flex items-center gap-2">
-                      <span className="w-1 h-1 rounded-full bg-amber-500/60 shrink-0" />
-                      {language === 'zh' ? skill.name : (skill.nameEn || skill.name)}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Web3 & Blockchain Exploration */}
-        <div>
-          <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-5 text-center tracking-tight">
-            {language === 'zh' ? 'Web3与区块链探索' : 'Web3 & Blockchain Exploration'}
-          </h3>
-          <p className="text-zinc-400 text-center max-w-3xl mx-auto mb-10 leading-relaxed text-lg">
-            {language === 'zh'
-              ? '作为Web3生态的探索者，我对去中心化技术的潜力充满信心。通过研究与实践，探索区块链技术如何重塑互联网的未来。'
-              : 'As a Web3 ecosystem explorer, I am confident in the potential of decentralized technology. Through research and practice, exploring how blockchain technology reshapes the future of the Internet.'}
-          </p>
-          <div className="grid md:grid-cols-3 gap-5">
-            {web3Areas.map((area, index) => (
-              <div key={index} className="bento-card glow-border animate-fade-in" style={{ animationDelay: `${index * 80}ms` }}>
-                <div className="text-4xl mb-5">{area.icon}</div>
-                <h4 className="text-lg font-bold text-white mb-4">
-                  {language === 'zh' ? area.title : area.titleEn}
-                </h4>
-                <ul className="space-y-2.5">
-                  {area.items.map((item, idx) => (
-                    <li key={idx} className="text-sm text-zinc-400 flex items-start gap-2.5">
-                      <span className="w-1 h-1 rounded-full bg-cyan-500/60 mt-2 shrink-0" />
-                      <span>{language === 'zh' ? item.text : item.textEn}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* Abundra Capital - Detailed Section */}
         <div>
           <h3 className="text-3xl md:text-5xl font-extrabold gradient-text mb-5 text-center tracking-tight">
@@ -496,56 +312,6 @@ export default function ProgrammingSection() {
             <p className="text-sm text-zinc-500 mt-4 text-center font-medium">
               — Abundra Capital {language === 'zh' ? '核心理念' : 'Core Philosophy'}
             </p>
-          </div>
-        </div>
-
-        {/* Future Technology Research */}
-        <div>
-          <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-10 text-center tracking-tight">
-            {language === 'zh' ? '未来技术研究方向' : 'Future Research Directions'}
-          </h3>
-          <div className="grid md:grid-cols-2 gap-5">
-            {futureResearch.map((research, index) => (
-              <div key={index} className="bento-card glow-border animate-fade-in" style={{ animationDelay: `${index * 80}ms` }}>
-                <div className="text-4xl mb-5">{research.icon}</div>
-                <h4 className="text-xl font-bold text-white mb-3">
-                  {language === 'zh' ? research.title : research.titleEn}
-                </h4>
-                <p className="text-sm text-zinc-400 mb-5 leading-relaxed">
-                  {language === 'zh' ? research.description : research.descriptionEn}
-                </p>
-                <ul className="space-y-2.5">
-                  {research.items.map((item, idx) => (
-                    <li key={idx} className="text-sm text-zinc-400 flex items-start gap-2.5">
-                      <span className="text-amber-500/60 mt-0.5">&#8594;</span>
-                      <span>{language === 'zh' ? item.text : item.textEn}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Learning Goals */}
-        <div>
-          <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-10 text-center tracking-tight">
-            {language === 'zh' ? '学习目标' : 'Learning Goals'}
-          </h3>
-          <div className="grid md:grid-cols-3 gap-5">
-            {learningGoals.map((goal, index) => (
-              <div key={index} className="bento-card glow-border text-center animate-fade-in" style={{ animationDelay: `${index * 80}ms` }}>
-                <div className="w-14 h-14 bg-gradient-to-br from-emerald-500/15 to-cyan-500/15 rounded-2xl flex items-center justify-center mx-auto mb-5 border border-emerald-500/20">
-                  <span className="text-2xl">{index === 0 ? '🎯' : index === 1 ? '🤖' : '🌟'}</span>
-                </div>
-                <h4 className="text-lg font-bold text-white mb-3">
-                  {language === 'zh' ? goal.goal : goal.goalEn}
-                </h4>
-                <p className="text-sm text-zinc-400 leading-relaxed">
-                  {language === 'zh' ? goal.description : goal.descriptionEn}
-                </p>
-              </div>
-            ))}
           </div>
         </div>
       </div>
